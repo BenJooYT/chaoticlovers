@@ -25,6 +25,14 @@ Check in this order:
 
 Open your first reply with the answer, e.g. `Working as hofi on branch hofi.` If a later instruction contradicts it, stop and confirm before acting.
 
+## Docs
+
+Detailed references live in [`docs/`](./docs/README.md). Read the relevant file before acting; it exists so you do not have to guess or ask. This applies to both people, Ben's agent and hofi's agent alike.
+
+- [`docs/blinkies.md`](./docs/blinkies.md) — where to find blinkie GIFs, the crediting and self-hosting rules, and how to add one to a page.
+
+When a task needs knowledge bigger than a paragraph, write it into `docs/`, link it from `docs/README.md`, and add it to the list above. Rules in this file always win over a doc; if they disagree, fix the doc.
+
 ## Talking to hofi — plain language, always
 
 **This section applies whenever you are working for hofi.** She is new to GitHub, coding, and computer science in general. That is fine — you adjust to her, not the other way around.

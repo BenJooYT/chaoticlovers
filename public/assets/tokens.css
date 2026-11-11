@@ -1,15 +1,20 @@
 :root {
   color-scheme: dark;
 
-  --bg: #111014;
-  --surface: #191822;
-  --text: #e8e4ef;
-  --muted: #9c94ad;
-  --line: #2a2733;
+  --bg: #0a090b;
+  --bg-glow: #17131a;
+  --surface: #121014;
+  --text: #e7e1e4;
+  --muted: #8b8189;
+  --line: #2b2529;
 
-  --radius: 12px;
+  --accent-ben: #b01b32;
+  --accent-hofi: #cf5f7a;
+
+  --radius: 2px;
   --measure: 34rem;
 
-  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: ui-serif, Georgia, 'Times New Roman', serif;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-display: 'Cormorant Garamond', Didot, Georgia, serif;
+  --font-goth: 'UnifrakturMaguntia', 'Old English Text MT', 'Times New Roman', serif;
 }

@@ -83,6 +83,7 @@ Rules: append only — never rewrite, reorder or delete a line, not even your ow
 - `content/` — writing that isn't a web page yet: memories, journal, poems. `ben/` and `hofi/` are personal; `shared/` is added to by both and never rewritten.
 - `data/people.json` — who is who: display name, GitHub login, folder, theme. One entry per person.
 - `AGENTS.md` — the rules our AI agents follow: who they work for, which branch, when to ask before publishing.
+- `docs/` — reference notes, starting at `docs/README.md`. `docs/blinkies.md` lists where to find blinkies and the rules for using them.
 - `.github/workflows/pages.yml` — publishes `public/` to the live site on every push to `main`.
 - `.github/workflows/format.yml` — runs the formatting check on every push and pull request.
 - `.github/CODEOWNERS` — who must review changes in which folder.
