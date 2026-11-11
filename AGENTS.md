@@ -62,6 +62,13 @@ Your first task for hofi in a session counts as her first look at the repo, unle
 - Say plainly that `main` is the live site and her branch is where her work waits until it is published.
 - Do it once per session, not before every task. If she says she remembers, drop it and get to work.
 
+### When neither of you is sure — ask Ben
+
+- Check the repo first: `README.md`, this file, and the code. Most questions are already answered there.
+- If it is still unclear — an ambiguous request, two plausible readings, a change that could break the live site — **ask Ben** (GitHub `BenJooYT`, alias lieyabull) instead of guessing.
+- Ask in a couple of lines: what is unclear, the options as you see them, and which you would pick. Then wait for the answer.
+- Never guess on anything that publishes, deletes, or overwrites.
+
 ## Branch rule
 
 Each person has exactly one long-lived branch: `ben` or `hofi`. Work only there; never commit to `main`.
@@ -112,6 +119,7 @@ Keep merges small: one reveal or one feature per merge beats five at once.
 **Shared — change with intent, expect a PR and the other person's review:**
 
 - `public/index.html`, `public/assets/tokens.css`, `public/assets/base.css`
+- `public/wall/`, `public/assets/home.js`, `public/assets/us.css` — the shared page (see below)
 - `data/` (identity and navigation)
 - `.github/`, `README.md`, `AGENTS.md`
 
@@ -121,6 +129,25 @@ Rules:
 - `content/shared/` is append-only: add new files, never rewrite or delete an existing entry.
 - Creating new files inside your own namespace is always safe — that is the intended way to add things.
 - Before touching a shared file, ask whether it needs to be shared at all, or whether it can live in your namespace.
+
+### The shared page — the front page
+
+The home page (`public/index.html`) is the deliberate exception to "everyone stays in their own folder". It belongs to both people: days-together counter, the wall, and the two corner buttons pinned to the top. It still never conflicts, because each person appends to their own stream:
+
+- `public/wall/ben.jsonl` and `public/wall/hofi.jsonl` — one JSON object per line. Append to the end of **your own** file only:
+  `{"date": "2026-11-11", "text": "first line"}`
+- `public/assets/home.js` — draws the counter and the wall. Shared; do not change without agreement.
+- `public/assets/us.css` — styling for the shared page. Shared; same rule.
+
+Rules for the wall:
+
+- Append only. Never rewrite, reorder, or delete lines — not even your own. A correction is a new line.
+- Never touch the other person's `.jsonl`.
+- Line order in the file does not matter; the page sorts by `date`, newest first.
+- Keep one entry per line, valid JSON, on a single line. A broken line is skipped silently, so check your entry.
+- This page is public and shared: nothing secret, nothing that reveals a surprise.
+
+The counter's start date is the `data-since` attribute in `public/index.html`, with the human-readable "since …" text next to it. It counts the first day as day one. Changing it is a shared edit — say so before doing it, and change both the attribute and the visible line together.
 
 ## Surprises
 

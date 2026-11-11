@@ -1,0 +1,134 @@
+.page-home {
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.7rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.brand {
+  font: 600 1rem var(--font-display);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.doors {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.door {
+  --accent: var(--text);
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: border-color 150ms ease;
+}
+
+.door-ben {
+  --accent: var(--accent-ben, var(--text));
+}
+
+.door-hofi {
+  --accent: var(--accent-hofi, var(--text));
+}
+
+.door:hover,
+.door:focus-visible {
+  border-color: var(--accent);
+}
+
+main.us {
+  width: 100%;
+  max-width: 34rem;
+  margin: 2.5rem auto 4rem;
+  padding: 0 1.25rem;
+  text-align: left;
+}
+
+.counter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0 0 0.5rem;
+  max-width: none;
+}
+
+.counter-days {
+  font: 600 clamp(2rem, 10vw, 3rem) / 1 var(--font-display);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.counter-label {
+  color: var(--muted);
+}
+
+.counter-since {
+  flex-basis: 100%;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.entry-ben {
+  border-left-color: var(--accent-ben, var(--text));
+}
+
+.entry-hofi {
+  border-left-color: var(--accent-hofi, var(--text));
+}
+
+.entry-meta {
+  margin: 0 0 0.25rem;
+  max-width: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entry-text {
+  margin: 0;
+  max-width: none;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.entry-empty {
+  color: var(--muted);
+  font-style: italic;
+}

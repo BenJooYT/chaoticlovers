@@ -13,23 +13,26 @@ Not a portfolio, more of a shared place: things we want to keep, things we want 
 
 `lieyabull` and `BenJooYT` are the same person.
 
-## What's planned
+## What's built, and what's planned
 
-Nothing but the shell is built yet:
+Built: the shared front page with the days-together counter and the wall, plus a personal corner each.
+
+Still to come:
 
 - **Time capsule / memories** — photos, notes, dated moments.
 - **Shared journal** — entries from whoever feels like writing.
 - **Writing** — blogs, stories, poems.
-- **Milestones** — anniversaries, days-together counter, upcoming dates.
+- **Milestones** — anniversaries and upcoming dates (the days counter is already live).
 - **Playground** — mini games and small interactive toys.
 
 ## Layout
 
 ```
 public/            what gets published
-  index.html       shared shell, generated-ish: edit rarely
+  index.html       the shared page: counter, wall, corner buttons
   assets/          tokens.css + base.css (shared), one folder per person
   ben/  hofi/      personal pages, owner-only
+  wall/            ben.jsonl and hofi.jsonl — the streams the wall reads
 content/           written material, split by owner
   ben/  hofi/  shared/
 data/people.json   one entry per person
@@ -39,14 +42,38 @@ The rule that keeps this conflict-free: **your work lives in your own folder**. 
 
 The shell (`public/index.html`, `assets/tokens.css`, `assets/base.css`, `data/`) is shared. Changes there are occasional and go through a PR.
 
+## The shared page — the front page
+
+The home page is ours together: <https://benjooyt.github.io/chaoticlovers/>
+
+It shows the days-together counter, the wall, and the two corner buttons (`ben`, `hofi`) pinned to the top of the screen.
+
+It is the exception to "stay in your own folder", and it still never causes a merge conflict, because nobody edits the same file. Each of us appends to our own stream:
+
+- `public/wall/ben.jsonl`
+- `public/wall/hofi.jsonl`
+
+One entry per line, valid JSON, appended at the end of your own file:
+
+```json
+{ "date": "2026-11-11", "text": "the first line" }
+```
+
+The page reads both files and sorts by date, newest first. A malformed line is skipped silently, so keep each entry on a single line.
+
+The counter counts the first day as day one. Its start date lives in `public/index.html` on the element carrying `data-since="2025-08-03"`, and the visible "since 3 August 2025" line sits right next to it — change both together.
+
+Rules: append only — never rewrite, reorder or delete a line, not even your own (a correction is a new line); never touch the other person's file; and nothing secret goes there, because the page is public.
+
 ## Repo tour, in plain words
 
 - `public/` — everything a visitor can see. Only this folder is published.
-  - `public/index.html` — the front page with the two doors.
+  - `public/index.html` — the shared page: the counter, the wall, and the corner buttons at the top.
   - `public/assets/tokens.css` — colours, fonts, spacing. Change a value here and the whole site follows.
   - `public/assets/base.css` — the shared layout for every page.
   - `public/assets/ben/`, `public/assets/hofi/` — personal styling, one owner each; `theme.css` holds that person's accent colour.
   - `public/ben/`, `public/hofi/` — personal pages. A new page is just a new file in your own folder.
+  - `public/wall/` — `ben.jsonl` and `hofi.jsonl`, the two streams the wall reads. `assets/home.js` draws the wall and the counter; `assets/us.css` styles the page.
 - `content/` — writing that isn't a web page yet: memories, journal, poems. `ben/` and `hofi/` are personal; `shared/` is added to by both and never rewritten.
 - `data/people.json` — who is who: display name, GitHub login, folder, theme. One entry per person.
 - `AGENTS.md` — the rules our AI agents follow: who they work for, which branch, when to ask before publishing.
