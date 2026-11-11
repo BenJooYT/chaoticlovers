@@ -25,6 +25,12 @@ Still to come:
 - **Milestones** — anniversaries and upcoming dates (the days counter is already live).
 - **Playground** — mini games and small interactive toys.
 
+## Stack
+
+No build step today: the published site is static HTML, CSS and a little JS, so a push is all it takes to ship.
+
+That is not a rule about what we may use. CDN libraries, hosted fonts, blinkie GIFs and other external assets are fine, and a per-person corner can be as elaborate as it likes. If a page outgrows static files, we add a framework and a build step to the Pages workflow; `AGENTS.md` says to ask Ben before introducing one.
+
 ## Layout
 
 ```

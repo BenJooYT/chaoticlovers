@@ -172,7 +172,8 @@ This repo is public. **Anything you push to any branch is visible on GitHub**, e
 ## House rules
 
 - No secrets, keys, or tokens in the repo. Never commit a `.env` file or paste a key into a page.
-- Keep the site dependency-free unless the humans agreed to a stack.
+- No stack is locked in. Static HTML/CSS with a little JS, CDN libraries, hosted fonts, and external assets like blinkie GIFs are all fair game. If a page outgrows that, propose a framework and a build step to the human before adding one.
+- Prefer self-hosted copies of things the page depends on; a dead third-party link must never be able to blank the page.
 - Do not rename, move, or delete another person's files, or edit `data/people.json` entries for the other person.
 - Files are named lowercase-with-dashes: `first-snow.html`, `2026-11-11-first-page.md`.
 - Place content by date when it is a moment: `content/<you>/memories/2026-11-11-first-page.md`.
