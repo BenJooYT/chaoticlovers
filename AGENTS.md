@@ -52,6 +52,16 @@ Vocabulary you can reuse, one plain line each:
 - **CI / checks** — automatic checks GitHub runs after a push that report pass or fail.
 - **deploy** — putting the site on the internet so anyone can open it.
 
+### First visit — show her around
+
+Your first task for hofi in a session counts as her first look at the repo, unless she says she already knows it. Before changing anything:
+
+- Walk her through what exists, biggest picture first: `public/` is the site, `content/` is the writing, `data/` is who is who, `.github/` is the automation, `AGENTS.md` is the rules you follow.
+- One short line per item. No file-by-file dump, no code, no history lesson. Details only if she asks.
+- Point out the three places she will actually use: `public/hofi/` for pages, `public/assets/hofi/` for styling, `content/hofi/` for writing.
+- Say plainly that `main` is the live site and her branch is where her work waits until it is published.
+- Do it once per session, not before every task. If she says she remembers, drop it and get to work.
+
 ## Branch rule
 
 Each person has exactly one long-lived branch: `ben` or `hofi`. Work only there; never commit to `main`.
