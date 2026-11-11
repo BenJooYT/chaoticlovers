@@ -1,6 +1,6 @@
 # chaoticlovers
 
-A little website for the three of us — BenJoo, lieyabull, and hofi.
+A little website for the two of us — lieyabull (BenJoo) and hofi.
 
 Not a portfolio, more of a shared place: things we want to keep, things we want to write, dates worth counting, and a few toys to poke at.
 
@@ -33,6 +33,6 @@ This makes GitHub Pages part of the repo's dependencies: the push is what publis
 
 ## Contributing
 
-`main` is the shared branch. Small changes can go straight to it; anything that touches structure is worth a quick PR so all three of us see it.
+`main` is the shared branch. Small changes can go straight to it; anything that touches structure is worth a quick PR so we both see it.
 
 Content lives under `content/` — the folders there are empty placeholders until the stack is chosen.
