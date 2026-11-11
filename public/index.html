@@ -3,28 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>chaoticlovers</title>
-    <meta name="description" content="A small shared space for lieyabull and hofi." />
+    <title>chaoticlovers — us</title>
+    <meta name="description" content="The page we both write on." />
     <link rel="stylesheet" href="assets/tokens.css" />
     <link rel="stylesheet" href="assets/base.css" />
     <link rel="stylesheet" href="assets/ben/theme.css" />
     <link rel="stylesheet" href="assets/hofi/theme.css" />
+    <link rel="stylesheet" href="assets/us.css" />
   </head>
-  <body>
-    <main>
-      <h1>chaoticlovers</h1>
-      <p>A small shared space. Two corners of our own, and one page we write on together.</p>
-      <ul class="people">
-        <li class="ben">
-          <a href="ben/">ben<small>lieyabull</small></a>
-        </li>
-        <li class="hofi">
-          <a href="hofi/">hofi<small>hofiszabi10</small></a>
-        </li>
-        <li class="us">
-          <a href="us/">us<small>both of us</small></a>
-        </li>
-      </ul>
+  <body class="page-home">
+    <header class="topbar">
+      <a class="brand" href="./">chaoticlovers</a>
+      <nav class="doors" aria-label="Our corners">
+        <a class="door door-ben" href="ben/">ben</a>
+        <a class="door door-hofi" href="hofi/">hofi</a>
+      </nav>
+    </header>
+
+    <main class="us">
+      <h1>us</h1>
+      <p class="counter" data-since="2025-08-03">
+        <span class="counter-days" id="days">—</span>
+        <span class="counter-label">days together</span>
+        <span class="counter-since">since 3 August 2025</span>
+      </p>
+      <p>One page we both write on. Long thoughts, small ones, whatever the day was.</p>
+      <ol id="wall" class="wall" aria-live="polite"></ol>
+      <noscript>
+        <p>This page needs JavaScript to show the counter and the wall.</p>
+      </noscript>
     </main>
+
+    <script src="assets/home.js"></script>
   </body>
 </html>

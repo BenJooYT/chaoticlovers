@@ -3,7 +3,24 @@ const STREAMS = [
   { who: 'hofi', file: 'wall/hofi.jsonl' },
 ];
 
-const wall = document.querySelector('#wall');
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function startCounter() {
+  const counter = document.querySelector('.counter');
+  const out = document.querySelector('#days');
+  if (!counter || !out) return;
+
+  const start = new Date(`${counter.dataset.since}T00:00:00`);
+  if (Number.isNaN(start.getTime())) return;
+
+  const today = new Date();
+  const startDay = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+  const todayDay = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+
+  // Counts the first day as day one.
+  const days = Math.round((todayDay - startDay) / DAY_MS) + 1;
+  out.textContent = days.toLocaleString();
+}
 
 function parseStream(who, text) {
   return text
@@ -59,7 +76,10 @@ function renderEntry(entry) {
   return item;
 }
 
-async function main() {
+async function renderWall() {
+  const wall = document.querySelector('#wall');
+  if (!wall) return;
+
   const entries = (await Promise.all(STREAMS.map(loadStream))).flat();
   entries.sort((a, b) => a.date.localeCompare(b.date)).reverse();
 
@@ -74,4 +94,5 @@ async function main() {
   wall.append(...entries.map(renderEntry));
 }
 
-main();
+startCounter();
+renderWall();
