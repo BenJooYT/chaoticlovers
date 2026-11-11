@@ -39,6 +39,23 @@ The rule that keeps this conflict-free: **your work lives in your own folder**. 
 
 The shell (`public/index.html`, `assets/tokens.css`, `assets/base.css`, `data/`) is shared. Changes there are occasional and go through a PR.
 
+## Repo tour, in plain words
+
+- `public/` — everything a visitor can see. Only this folder is published.
+  - `public/index.html` — the front page with the two doors.
+  - `public/assets/tokens.css` — colours, fonts, spacing. Change a value here and the whole site follows.
+  - `public/assets/base.css` — the shared layout for every page.
+  - `public/assets/ben/`, `public/assets/hofi/` — personal styling, one owner each; `theme.css` holds that person's accent colour.
+  - `public/ben/`, `public/hofi/` — personal pages. A new page is just a new file in your own folder.
+- `content/` — writing that isn't a web page yet: memories, journal, poems. `ben/` and `hofi/` are personal; `shared/` is added to by both and never rewritten.
+- `data/people.json` — who is who: display name, GitHub login, folder, theme. One entry per person.
+- `AGENTS.md` — the rules our AI agents follow: who they work for, which branch, when to ask before publishing.
+- `.github/workflows/pages.yml` — publishes `public/` to the live site on every push to `main`.
+- `.github/workflows/format.yml` — runs the formatting check on every push and pull request.
+- `.github/CODEOWNERS` — who must review changes in which folder.
+- `.editorconfig`, `.gitattributes`, `.prettierrc.json`, `.prettierignore` — formatting settings, so both agents write code the same way.
+- `.gitignore` — files git should never track.
+
 ## Working together
 
 - `main` is what visitors get. **Nobody commits to it directly.**

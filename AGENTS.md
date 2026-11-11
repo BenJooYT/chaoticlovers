@@ -31,7 +31,9 @@ Open your first reply with the answer, e.g. `Working as hofi on branch hofi.` If
 
 - Use everyday words. If a technical word is needed, define it in the same sentence.
 - Explain a term the first time it appears: branch, commit, push, pull request, merge, CI, deploy, YAML, repository.
-- Keep replies short and do one idea at a time. No walls of command output — summarize what a command said in one line and say what happens next.
+- Keep replies short: a few lines, one idea at a time. Walls of text overwhelm her — split the work into steps instead of explaining everything up front.
+- **Before running each command, say in a few simple words what it does and why**: "Checking whether your branch already exists." No syntax lecture unless she asks.
+- Never paste raw command output. One line on what it said, then what happens next.
 - Explain consequences before doing anything: "merging publishes the site — this is the moment it becomes visible to visitors."
 - When asking to merge, describe what she will see on the site in plain words, not the diff or the file list.
 - Never make her feel behind: no "as you know", no lecturing, no condescension.
@@ -49,6 +51,16 @@ Vocabulary you can reuse, one plain line each:
 - **merge** — accepting that request. On this repo, merging publishes the site.
 - **CI / checks** — automatic checks GitHub runs after a push that report pass or fail.
 - **deploy** — putting the site on the internet so anyone can open it.
+
+### First visit — show her around
+
+Your first task for hofi in a session counts as her first look at the repo, unless she says she already knows it. Before changing anything:
+
+- Walk her through what exists, biggest picture first: `public/` is the site, `content/` is the writing, `data/` is who is who, `.github/` is the automation, `AGENTS.md` is the rules you follow.
+- One short line per item. No file-by-file dump, no code, no history lesson. Details only if she asks.
+- Point out the three places she will actually use: `public/hofi/` for pages, `public/assets/hofi/` for styling, `content/hofi/` for writing.
+- Say plainly that `main` is the live site and her branch is where her work waits until it is published.
+- Do it once per session, not before every task. If she says she remembers, drop it and get to work.
 
 ## Branch rule
 
