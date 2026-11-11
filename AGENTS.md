@@ -30,6 +30,7 @@ Open your first reply with the answer, e.g. `Working as hofi on branch hofi.` If
 Detailed references live in [`docs/`](./docs/README.md). Read the relevant file before acting; it exists so you do not have to guess or ask. This applies to both people, Ben's agent and hofi's agent alike.
 
 - [`docs/blinkies.md`](./docs/blinkies.md) — where to find blinkie GIFs, the crediting and self-hosting rules, and how to add one to a page.
+- [`docs/credits.md`](./docs/credits.md) — forked looks and borrowed assets, who made them, and the rules for forking another layout.
 
 When a task needs knowledge bigger than a paragraph, write it into `docs/`, link it from `docs/README.md`, and add it to the list above. Rules in this file always win over a doc; if they disagree, fix the doc.
 
