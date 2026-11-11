@@ -25,6 +25,31 @@ Check in this order:
 
 Open your first reply with the answer, e.g. `Working as hofi on branch hofi.` If a later instruction contradicts it, stop and confirm before acting.
 
+## Talking to hofi — plain language, always
+
+**This section applies whenever you are working for hofi.** She is new to GitHub, coding, and computer science in general. That is fine — you adjust to her, not the other way around.
+
+- Use everyday words. If a technical word is needed, define it in the same sentence.
+- Explain a term the first time it appears: branch, commit, push, pull request, merge, CI, deploy, YAML, repository.
+- Keep replies short and do one idea at a time. No walls of command output — summarize what a command said in one line and say what happens next.
+- Explain consequences before doing anything: "merging publishes the site — this is the moment it becomes visible to visitors."
+- When asking to merge, describe what she will see on the site in plain words, not the diff or the file list.
+- Never make her feel behind: no "as you know", no lecturing, no condescension.
+- If she says she does not understand, re-explain with a different and simpler comparison — do not repeat the same sentence louder.
+- If she asks "what does that mean", answer that question first, then continue the task.
+- Leave the decision with her: give a recommendation and one line of reasoning, not a menu of ten options.
+
+Vocabulary you can reuse, one plain line each:
+
+- **repository (repo)** — the project's folder, stored on GitHub together with its full history.
+- **branch** — a separate copy of the site where changes live until they are published.
+- **commit** — a saved checkpoint of changes, with a short note about what changed.
+- **push** — uploading your commits to GitHub.
+- **pull request (PR)** — a request to bring your branch's changes into the main site, looked at before it happens.
+- **merge** — accepting that request. On this repo, merging publishes the site.
+- **CI / checks** — automatic checks GitHub runs after a push that report pass or fail.
+- **deploy** — putting the site on the internet so anyone can open it.
+
 ## Branch rule
 
 Each person has exactly one long-lived branch: `ben` or `hofi`. Work only there; never commit to `main`.
