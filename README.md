@@ -30,6 +30,7 @@ public/            what gets published
   index.html       shared shell, generated-ish: edit rarely
   assets/          tokens.css + base.css (shared), one folder per person
   ben/  hofi/      personal pages, owner-only
+  us/              the shared page both of us write on
 content/           written material, split by owner
   ben/  hofi/  shared/
 data/people.json   one entry per person
@@ -39,14 +40,34 @@ The rule that keeps this conflict-free: **your work lives in your own folder**. 
 
 The shell (`public/index.html`, `assets/tokens.css`, `assets/base.css`, `data/`) is shared. Changes there are occasional and go through a PR.
 
+## The shared page — `/us/`
+
+One page we both write on: <https://benjooyt.github.io/chaoticlovers/us/>
+
+It is the exception to "stay in your own folder", and it still never causes a merge conflict, because nobody edits the same file. Each of us appends to our own stream:
+
+- `public/us/wall/ben.jsonl`
+- `public/us/wall/hofi.jsonl`
+
+One entry per line, valid JSON, appended at the end of your own file:
+
+```json
+{ "date": "2026-11-11", "text": "the first line" }
+```
+
+The page reads both files and sorts by date, newest first. A malformed line is skipped silently, so keep each entry on a single line.
+
+Rules: append only — never rewrite, reorder or delete a line, not even your own (a correction is a new line); never touch the other person's file; and nothing secret goes there, because the page is public.
+
 ## Repo tour, in plain words
 
 - `public/` — everything a visitor can see. Only this folder is published.
-  - `public/index.html` — the front page with the two doors.
+  - `public/index.html` — the front page with three doors: ben, hofi, us.
   - `public/assets/tokens.css` — colours, fonts, spacing. Change a value here and the whole site follows.
   - `public/assets/base.css` — the shared layout for every page.
   - `public/assets/ben/`, `public/assets/hofi/` — personal styling, one owner each; `theme.css` holds that person's accent colour.
   - `public/ben/`, `public/hofi/` — personal pages. A new page is just a new file in your own folder.
+  - `public/us/` — the shared page. `wall/ben.jsonl` and `wall/hofi.jsonl` are the two streams it reads; `wall.js` builds the timeline and `assets/us.css` styles it.
 - `content/` — writing that isn't a web page yet: memories, journal, poems. `ben/` and `hofi/` are personal; `shared/` is added to by both and never rewritten.
 - `data/people.json` — who is who: display name, GitHub login, folder, theme. One entry per person.
 - `AGENTS.md` — the rules our AI agents follow: who they work for, which branch, when to ask before publishing.

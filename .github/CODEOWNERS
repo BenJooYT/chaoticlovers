@@ -1,6 +1,9 @@
 # Shared files need both owners; personal namespaces need only their owner.
 *                     @BenJooYT @hofiszabi10-svg
 
+# The one page both people write on.
+/public/us/           @BenJooYT @hofiszabi10-svg
+
 /public/ben/          @BenJooYT
 /public/assets/ben/   @BenJooYT
 /content/ben/         @BenJooYT

@@ -1,0 +1,52 @@
+main.us {
+  width: 100%;
+  max-width: 34rem;
+  text-align: left;
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.entry-ben {
+  border-left-color: var(--accent-ben, var(--text));
+}
+
+.entry-hofi {
+  border-left-color: var(--accent-hofi, var(--text));
+}
+
+.entry-meta {
+  margin: 0 0 0.25rem;
+  max-width: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entry-text {
+  margin: 0;
+  max-width: none;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.entry-empty {
+  color: var(--muted);
+  font-style: italic;
+}

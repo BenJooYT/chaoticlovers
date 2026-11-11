@@ -112,6 +112,7 @@ Keep merges small: one reveal or one feature per merge beats five at once.
 **Shared — change with intent, expect a PR and the other person's review:**
 
 - `public/index.html`, `public/assets/tokens.css`, `public/assets/base.css`
+- `public/us/` — the one page both people write on (see below)
 - `data/` (identity and navigation)
 - `.github/`, `README.md`, `AGENTS.md`
 
@@ -121,6 +122,23 @@ Rules:
 - `content/shared/` is append-only: add new files, never rewrite or delete an existing entry.
 - Creating new files inside your own namespace is always safe — that is the intended way to add things.
 - Before touching a shared file, ask whether it needs to be shared at all, or whether it can live in your namespace.
+
+### The shared page — `public/us/`
+
+This is the deliberate exception to "everyone stays in their own folder". Both people contribute to one page, and it still never conflicts, because each person appends to their own stream:
+
+- `public/us/index.html` — the page and its single intro line. Shared; edit rarely, and say so.
+- `public/us/wall/ben.jsonl` and `public/us/wall/hofi.jsonl` — one JSON object per line. Append to the end of **your own** file only:
+  `{"date": "2026-11-11", "text": "first line"}`
+- `public/us/wall.js`, `public/assets/us.css` — the renderer. Shared; do not change without agreement.
+
+Rules for the wall:
+
+- Append only. Never rewrite, reorder, or delete lines — not even your own. A correction is a new line.
+- Never touch the other person's `.jsonl`.
+- Line order in the file does not matter; the page sorts by `date`, newest first.
+- Keep one entry per line, valid JSON, on a single line. A broken line is skipped silently, so check your entry.
+- This page is public and shared: nothing secret, nothing that reveals a surprise.
 
 ## Surprises
 
