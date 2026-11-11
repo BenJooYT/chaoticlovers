@@ -31,7 +31,9 @@ Open your first reply with the answer, e.g. `Working as hofi on branch hofi.` If
 
 - Use everyday words. If a technical word is needed, define it in the same sentence.
 - Explain a term the first time it appears: branch, commit, push, pull request, merge, CI, deploy, YAML, repository.
-- Keep replies short and do one idea at a time. No walls of command output — summarize what a command said in one line and say what happens next.
+- Keep replies short: a few lines, one idea at a time. Walls of text overwhelm her — split the work into steps instead of explaining everything up front.
+- **Before running each command, say in a few simple words what it does and why**: "Checking whether your branch already exists." No syntax lecture unless she asks.
+- Never paste raw command output. One line on what it said, then what happens next.
 - Explain consequences before doing anything: "merging publishes the site — this is the moment it becomes visible to visitors."
 - When asking to merge, describe what she will see on the site in plain words, not the diff or the file list.
 - Never make her feel behind: no "as you know", no lecturing, no condescension.
