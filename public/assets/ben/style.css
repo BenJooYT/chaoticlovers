@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'black demon';
+  src: url('../../ben/media/fonts/black-demon.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'goth stencil';
+  src: url('../../ben/media/fonts/goth-stencil.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mcr';
+  src: url('../../ben/media/fonts/mcr.ttf') format('truetype');
+  font-display: swap;
+}
+
 :root {
   --blood: #5e0303;
   --blood-bright: #b10707;
@@ -5,8 +23,7 @@
   --bone: #e7e1e4;
   --ash: #8b8189;
   --void: #0a090b;
-  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --body: Georgia, 'Times New Roman', serif;
+  --panel: #0000007a;
 }
 
 html {
@@ -34,55 +51,72 @@ html {
 }
 
 body.corner {
-  position: relative;
-  justify-content: flex-start;
-  gap: 1.35rem;
-  padding: 0 1rem 3rem;
+  display: block;
+  min-height: 100vh;
+  margin: 0;
+  padding: 18px 10px 40px;
   text-align: center;
-  font-family: var(--body);
-  color: var(--bone);
+  font-family: 'goth stencil', Verdana, Geneva, sans-serif;
+  font-size: 100%;
+  color: var(--blood);
   background:
-    linear-gradient(rgba(6, 4, 6, 0.45), rgba(6, 4, 6, 0.72)),
+    linear-gradient(rgba(6, 4, 6, 0.42), rgba(6, 4, 6, 0.72)),
     url('../../ben/media/vampire-forest.jpg') center / cover fixed,
     var(--void);
 }
 
-body.corner::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 50% 38%, transparent 36%, rgba(0, 0, 0, 0.6) 100%),
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 4px);
+.page {
+  width: 849px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
-body.corner > * {
-  position: relative;
-  z-index: 1;
+.banner {
+  padding: 22px 10px 18px;
+  border: 1px solid var(--blood);
+  box-shadow: 4px 3px var(--blood);
+  background: var(--panel);
 }
 
-.bloodline {
-  width: calc(100% + 2rem);
-  height: 2px;
-  margin-left: -1rem;
-  background: linear-gradient(90deg, transparent, var(--blood-bright) 25% 75%, transparent);
-  box-shadow: 0 0 16px var(--blood-glow);
+.banner-kicker {
+  margin: 0 0 10px;
+  color: var(--blood-bright);
+  font-family: 'mcr', 'goth stencil', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 9px var(--blood-glow);
+  text-transform: uppercase;
+}
+
+.banner h1 {
+  margin: 0;
+  color: #f2e9ec;
+  font-family: 'black demon', 'goth stencil', serif;
+  font-size: 3.4rem;
+  font-weight: 400;
+  line-height: 1;
+  text-shadow:
+    0 0 26px rgba(255, 0, 0, 0.5),
+    4px 3px 0 #000;
+}
+
+.banner-sub {
+  margin: 12px 0 0;
+  color: var(--blood-bright);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
 }
 
 .marquee {
-  width: calc(100% + 2rem);
-  max-width: none;
   overflow: hidden;
-  margin-left: -1rem;
-  padding: 0.55rem 0;
-  border-block: 1px solid var(--blood);
-  background: rgba(94, 3, 3, 0.35);
+  margin: 12px 0;
+  padding: 5px 0;
+  border: 1px solid var(--blood);
+  background: rgba(94, 3, 3, 0.4);
   color: var(--blood-bright);
-  font-family: var(--serif);
-  font-size: 0.82rem;
-  letter-spacing: 0.24em;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
   text-shadow: 0 0 8px var(--blood-glow);
   text-transform: uppercase;
   white-space: nowrap;
@@ -90,169 +124,145 @@ body.corner > * {
 
 .marquee span {
   display: inline-block;
-  padding-left: 18%;
-  animation: marquee 26s linear infinite;
+  padding-left: 12%;
+  animation: marquee 24s linear infinite;
 }
 
-.corner-head {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: center;
-}
-
-.kicker {
-  max-width: none;
-  color: var(--blood-bright);
-  font-family: var(--serif);
-  font-size: 0.8rem;
-  letter-spacing: 0.34em;
-  text-shadow: 0 0 9px var(--blood-glow);
-  text-transform: uppercase;
-}
-
-.corner-head h1 {
-  font-family: var(--font-goth);
-  font-size: clamp(2.9rem, 17vw, 4.6rem);
-  font-weight: 400;
-  line-height: 1;
-  color: #f2e9ec;
-  letter-spacing: 0.01em;
-  text-shadow:
-    0 0 30px rgba(255, 0, 0, 0.45),
-    4px 3px 0 #000;
-}
-
-.cursor {
-  color: var(--blood-bright);
-  animation: blink 1.2s steps(1) infinite;
-}
-
-.tagline {
-  max-width: none;
-  color: var(--ash);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.05rem;
-}
-
-.blinkies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.blinkies img {
+.layout {
   display: block;
-  width: auto;
-  height: 20px;
-  image-rendering: pixelated;
-}
-
-.blinkies img:hover {
-  animation: shake 0.7s linear infinite;
-}
-
-.corner-main {
-  display: grid;
-  gap: 1.1rem;
-  width: 100%;
-  max-width: 42rem;
   text-align: left;
 }
 
-.card {
-  padding: 0 0 1rem;
-  border: 1px solid var(--blood);
-  box-shadow: 4px 3px var(--blood);
-  background: rgba(0, 0, 0, 0.55);
+.col-main,
+.col-side {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  vertical-align: top;
 }
 
-.card h2 {
-  margin: 0 0 0.9rem;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(91deg, rgba(94, 3, 3, 0.78), transparent);
+@media (min-width: 720px) {
+  .col-main {
+    width: 574px;
+    margin-right: 6px;
+  }
+
+  .col-side {
+    width: 259px;
+  }
+}
+
+.box {
+  margin: 0 0 12px;
+  border: 1px solid var(--blood);
+  box-shadow: 4px 3px var(--blood);
+  background: var(--panel);
+}
+
+.box h2 {
+  margin: 0;
+  padding: 3px 8px;
+  border-bottom: 1px solid var(--blood);
+  background: linear-gradient(91deg, rgba(94, 3, 3, 0.85), transparent);
   color: var(--blood-bright);
-  font-family: 'Grenze Gotisch', var(--serif);
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-family: 'mcr', 'goth stencil', serif;
+  font-size: 0.82rem;
+  font-weight: 400;
   letter-spacing: 0.16em;
+  text-align: left;
   text-shadow: 3px 2px #000;
   text-transform: uppercase;
 }
 
-.card p {
-  max-width: none;
-  padding: 0 1rem;
+.box-body {
+  padding: 9px 10px 11px;
   color: var(--bone);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 11px;
   line-height: 1.7;
+  text-align: left;
 }
 
-dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem 0.9rem;
-  margin: 0;
-  padding: 0 1rem;
-}
-
-dt {
-  align-self: center;
-  color: var(--ash);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-dd {
-  margin: 0;
+.box-body p {
+  max-width: none;
+  margin: 0 0 7px;
   color: var(--bone);
+}
+
+.box-body p:last-child {
+  margin-bottom: 0;
+}
+
+.box-body .small {
+  color: var(--ash);
+  font-size: 10px;
+}
+
+.box-body .tiny {
+  color: var(--ash);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.center {
+  text-align: center;
+}
+
+.info {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info th {
+  width: 34%;
+  padding: 2px 4px;
+  border: 1px solid var(--blood);
+  background: transparent;
+  color: var(--blood);
+  font-family: 'mcr', 'goth stencil', serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.info td {
+  padding: 2px 6px;
+  border: 1px solid var(--blood);
+  color: var(--bone);
+  font-size: 11px;
+  vertical-align: top;
 }
 
 .toys {
-  margin: 0.6rem 0 0;
-  padding-left: 2rem;
+  margin: 6px 0 0;
+  padding-left: 18px;
   color: var(--bone);
 }
 
 .toys li {
-  margin: 0.3rem 0;
+  margin: 2px 0;
 }
 
 .toys li::marker {
   color: var(--blood-bright);
 }
 
-.corner-foot {
-  display: grid;
-  gap: 0.7rem;
-  justify-items: center;
+.navlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.stat {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  max-width: none;
-  color: var(--ash);
-  font-family: var(--serif);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.stat-count {
-  padding: 0.3rem 0.55rem;
-  border: 1px solid var(--blood);
-  box-shadow: 3px 2px var(--blood);
-  background: #000;
-  color: var(--bone);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.12em;
+.navlist li {
+  margin: 0 0 3px;
 }
 
 a {
-  color: var(--blood-bright);
+  color: #820c0c;
+  font-weight: bold;
   text-decoration: line-through;
   text-decoration-style: dashed;
   text-decoration-color: #971919;
@@ -262,49 +272,70 @@ a {
 a:hover,
 a:focus-visible {
   color: #e31515;
-}
-
-.back a {
-  color: var(--blood-bright);
-  font-family: var(--serif);
-  font-size: 0.98rem;
-  text-decoration: none;
-  border-bottom: 1px dotted rgba(151, 25, 25, 0.7);
-}
-
-.fineprint {
-  max-width: none;
-  color: #6d646c;
-  font-size: 0.8rem;
   font-style: italic;
-}
-
-.credits {
-  max-width: 26rem;
-  color: #6d646c;
-  font-size: 0.72rem;
-  line-height: 1.6;
-}
-
-.credits a {
-  color: var(--ash);
-  text-shadow: none;
+  text-transform: uppercase;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--blood-bright);
-  outline-offset: 3px;
+  outline: 1px dotted #e31515;
+  outline-offset: 2px;
+}
+
+.blinkies {
+  line-height: 0;
+  text-align: center;
+}
+
+.blinkies img {
+  display: inline-block;
+  width: auto;
+  height: 20px;
+  margin: 3px 2px;
+  image-rendering: pixelated;
+}
+
+.blinkies img:hover {
+  animation: shake 0.7s linear infinite;
+}
+
+.counter {
+  display: inline-block;
+  margin: 2px auto 6px !important;
+  padding: 3px 8px;
+  border: 1px solid var(--blood);
+  background: #000;
+  color: var(--blood-bright);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.28em;
+  text-shadow: 0 0 8px var(--blood-glow);
+}
+
+.footer {
+  margin: 16px 0 0;
+  padding: 9px 6px;
+  border-top: 1px solid var(--blood);
+  color: darkred;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.footer p {
+  max-width: none;
+  margin: 0;
+  color: darkred;
+}
+
+.footer .tiny {
+  color: #6d646c;
+  font-size: 9px;
 }
 
 @keyframes marquee {
   to {
     transform: translateX(-100%);
-  }
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
   }
 }
 
@@ -329,23 +360,12 @@ a:focus-visible {
   }
 }
 
-@media (min-width: 720px) {
-  .corner-main {
-    grid-template-columns: 1.35fr 1fr;
-  }
-
-  .card-wide {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .marquee span {
     padding-left: 0;
     animation: none;
   }
 
-  .cursor,
   .blinkies img:hover {
     animation: none;
   }
