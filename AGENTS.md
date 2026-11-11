@@ -169,6 +169,8 @@ This repo is public. **Anything you push to any branch is visible on GitHub**, e
 
 `.github/workflows/pages.yml` publishes `public/` to GitHub Pages on every push to `main`, and only `main`. The site lives under `https://benjooyt.github.io/chaoticlovers/`, so **use relative paths** (`assets/base.css`, `ben/`, `../`) — a leading `/` points at the wrong place and will 404.
 
+The workflow also writes `public/stats.json` (tracked line and file counts) just before upload. It is generated and gitignored: never commit it, never hand-edit it, and read it defensively in the page (a missing file must not break anything).
+
 ## House rules
 
 - No secrets, keys, or tokens in the repo. Never commit a `.env` file or paste a key into a page.

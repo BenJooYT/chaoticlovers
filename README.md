@@ -105,6 +105,7 @@ Live URL: <https://benjooyt.github.io/chaoticlovers/>
 
 - **Runs on every push to `main`**, plus manual dispatch. Nothing else deploys.
 - Only `public/` is served (`README.md`, `content/`, the rest stay out).
+- Before upload it writes `public/stats.json` with line and file counts of the tracked code. It is generated on every deploy and gitignored, so never hand-edit it.
 - **Required repo setting**: Settings → Pages → Build and deployment → Source must be **GitHub Actions** (already configured).
 - Pages serves under `/chaoticlovers/`, so every link and asset path must be **relative** — a leading `/` 404s.
 

@@ -34,3 +34,6 @@ venv/
 # Logs and temp
 *.log
 *.tmp
+
+# Generated at deploy time by pages.yml, never committed
+public/stats.json
