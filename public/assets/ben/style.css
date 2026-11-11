@@ -333,6 +333,20 @@ a:focus-visible {
   font-size: 9px;
 }
 
+.hidden-door {
+  padding: 0 2px;
+  color: #4a4348;
+  font-weight: normal;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.hidden-door:hover,
+.hidden-door:focus-visible {
+  color: var(--blood-bright);
+  text-shadow: 0 0 8px var(--blood-glow);
+}
+
 @keyframes marquee {
   to {
     transform: translateX(-100%);
