@@ -1,0 +1,15 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #111014;
+  --surface: #191822;
+  --text: #e8e4ef;
+  --muted: #9c94ad;
+  --line: #2a2733;
+
+  --radius: 12px;
+  --measure: 34rem;
+
+  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: ui-serif, Georgia, 'Times New Roman', serif;
+}

@@ -1,0 +1,10 @@
+# Shared files need both owners; personal namespaces need only their owner.
+*                     @BenJooYT @hofiszabi10-svg
+
+/public/ben/          @BenJooYT
+/public/assets/ben/   @BenJooYT
+/content/ben/         @BenJooYT
+
+/public/hofi/         @hofiszabi10-svg
+/public/assets/hofi/  @hofiszabi10-svg
+/content/hofi/        @hofiszabi10-svg

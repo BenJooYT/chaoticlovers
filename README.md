@@ -4,9 +4,18 @@ A little website for the two of us — lieyabull (BenJoo) and hofi.
 
 Not a portfolio, more of a shared place: things we want to keep, things we want to write, dates worth counting, and a few toys to poke at.
 
-## Planned sections
+## Who's who
 
-Nothing is built yet — these are the placeholders we agreed on:
+| Who                     | GitHub            | Branch | Owns                                                   |
+| ----------------------- | ----------------- | ------ | ------------------------------------------------------ |
+| BenJoo, alias lieyabull | `BenJooYT`        | `ben`  | `public/ben/`, `public/assets/ben/`, `content/ben/`    |
+| hofi                    | `hofiszabi10-svg` | `hofi` | `public/hofi/`, `public/assets/hofi/`, `content/hofi/` |
+
+`lieyabull` and `BenJooYT` are the same person.
+
+## What's planned
+
+Nothing but the shell is built yet:
 
 - **Time capsule / memories** — photos, notes, dated moments.
 - **Shared journal** — entries from whoever feels like writing.
@@ -14,25 +23,49 @@ Nothing is built yet — these are the placeholders we agreed on:
 - **Milestones** — anniversaries, days-together counter, upcoming dates.
 - **Playground** — mini games and small interactive toys.
 
-## Stack
+## Layout
 
-Deliberately undecided. The repo starts as a skeleton so we can pick a stack once we know what the first real page needs.
+```
+public/            what gets published
+  index.html       shared shell, generated-ish: edit rarely
+  assets/          tokens.css + base.css (shared), one folder per person
+  ben/  hofi/      personal pages, owner-only
+content/           written material, split by owner
+  ben/  hofi/  shared/
+data/people.json   one entry per person
+```
+
+The rule that keeps this conflict-free: **your work lives in your own folder**. Adding a page, a poem, or a surprise means adding files under `public/<you>/`, `public/assets/<you>/`, or `content/<you>/` — nothing else in the repo has to change, so two agents can work at the same time without touching a shared line.
+
+The shell (`public/index.html`, `assets/tokens.css`, `assets/base.css`, `data/`) is shared. Changes there are occasional and go through a PR.
+
+## Working together
+
+- `main` is what visitors get. **Nobody commits to it directly.**
+- One long-lived branch per person: `ben` and `hofi`. Work stays there.
+- Merging to `main` is a PR, and only after the human says yes. Merging publishes, so it doubles as the reveal.
+- This repo is **public**: anything pushed to a branch is visible on GitHub even though it isn't live. Truly secret work stays unpushed (or in the private vault, if we make one).
+- `AGENTS.md` is the contract our agents follow — it tells them to check who they're working for, which branch to use, and when to ask before merging.
 
 ## Deployment — GitHub Pages (required)
 
-The site is published with **GitHub Pages**, driven by `.github/workflows/pages.yml`.
+`.github/workflows/pages.yml` publishes `public/` to GitHub Pages.
 
 Live URL: <https://benjooyt.github.io/chaoticlovers/>
 
-- **Runs on every push** — no manual trigger, no separate deploy step to remember.
-- **Deploy root is `public/`** — only what sits in that folder is published. `README.md`, `content/`, and the rest of the repo stay out of the served site.
-- **Required repo setting**: Settings → Pages → Build and deployment → Source must be **GitHub Actions** (already configured). Without it the workflow fails at the deploy step.
-- No build step today: `public/index.html` is a placeholder and is uploaded as-is.
+- **Runs on every push to `main`**, plus manual dispatch. Nothing else deploys.
+- Only `public/` is served (`README.md`, `content/`, the rest stay out).
+- **Required repo setting**: Settings → Pages → Build and deployment → Source must be **GitHub Actions** (already configured).
+- Pages serves under `/chaoticlovers/`, so every link and asset path must be **relative** — a leading `/` 404s.
 
-This makes GitHub Pages part of the repo's dependencies: the push is what publishes, so the workflow and the Pages source setting both have to stay intact. When a stack is chosen, add its build to the workflow and point `path:` at the output directory (`_site` for Eleventy, `dist` for Astro, `public` for Hugo, etc.).
+When a build step is added later, insert it into the workflow and point `path:` at its output (`_site` for Eleventy, `dist` for Astro, etc.).
 
-## Contributing
+## Formatting
 
-`main` is the shared branch. Small changes can go straight to it; anything that touches structure is worth a quick PR so we both see it.
+Prettier 3.6.2, checked in CI on pushes and PRs:
 
-Content lives under `content/` — the folders there are empty placeholders until the stack is chosen.
+```
+npx prettier@3.6.2 --write <paths you changed>
+```
+
+Format only what you touched. Repo-wide reformatting is what turns two agents into constant merge conflicts.

@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 var(--font-body);
+}
+
+h1 {
+  margin: 0;
+  font: 600 clamp(1.7rem, 6vw, 2.5rem) / 1.15 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.people a {
+  --accent: var(--text);
+  display: block;
+  min-width: 8rem;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.people .ben a {
+  --accent: var(--accent-ben, var(--text));
+}
+
+.people .hofi a {
+  --accent: var(--accent-hofi, var(--text));
+}
+
+.people a:hover,
+.people a:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.people small {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.back {
+  font-size: 0.9rem;
+  color: var(--muted);
+}

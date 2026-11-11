@@ -1,0 +1,4 @@
+:root {
+  --accent-hofi: #f7768e;
+  --accent: var(--accent-hofi);
+}

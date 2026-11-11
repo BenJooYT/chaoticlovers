@@ -1,0 +1,3 @@
+# Prose and media are hand-authored; formatting them creates noisy diffs.
+content/
+*.min.*
