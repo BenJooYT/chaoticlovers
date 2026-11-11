@@ -1,13 +1,36 @@
 :root {
-  --ink-red: #a3162e;
-  --ink-red-bright: #c2495c;
+  --blood: #5e0303;
+  --blood-bright: #b10707;
+  --blood-glow: rgba(255, 0, 0, 0.6);
   --bone: #e7e1e4;
   --ash: #8b8189;
   --void: #0a090b;
-  --slab: #100e12;
-  --hair: #2b2529;
   --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --body: Georgia, 'Times New Roman', serif;
+}
+
+html {
+  scrollbar-color: var(--blood-bright) #000;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: #000;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px dotted var(--blood);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blood);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blood-bright);
 }
 
 body.corner {
@@ -18,7 +41,10 @@ body.corner {
   text-align: center;
   font-family: var(--body);
   color: var(--bone);
-  background: radial-gradient(120% 70% at 50% -10%, #1b1218 0%, transparent 62%), var(--void);
+  background:
+    linear-gradient(rgba(6, 4, 6, 0.45), rgba(6, 4, 6, 0.72)),
+    url('../../ben/media/vampire-forest.jpg') center / cover fixed,
+    var(--void);
 }
 
 body.corner::before {
@@ -28,8 +54,8 @@ body.corner::before {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 38%, transparent 34%, rgba(0, 0, 0, 0.72) 100%),
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.014) 0 1px, transparent 1px 4px);
+    radial-gradient(ellipse at 50% 38%, transparent 36%, rgba(0, 0, 0, 0.6) 100%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 4px);
 }
 
 body.corner > * {
@@ -41,8 +67,8 @@ body.corner > * {
   width: calc(100% + 2rem);
   height: 2px;
   margin-left: -1rem;
-  background: linear-gradient(90deg, transparent, var(--ink-red) 25% 75%, transparent);
-  box-shadow: 0 0 14px rgba(163, 22, 46, 0.5);
+  background: linear-gradient(90deg, transparent, var(--blood-bright) 25% 75%, transparent);
+  box-shadow: 0 0 16px var(--blood-glow);
 }
 
 .marquee {
@@ -51,12 +77,13 @@ body.corner > * {
   overflow: hidden;
   margin-left: -1rem;
   padding: 0.55rem 0;
-  border-block: 1px solid rgba(163, 22, 46, 0.45);
-  background: rgba(163, 22, 46, 0.06);
-  color: var(--ink-red-bright);
+  border-block: 1px solid var(--blood);
+  background: rgba(94, 3, 3, 0.35);
+  color: var(--blood-bright);
   font-family: var(--serif);
   font-size: 0.82rem;
   letter-spacing: 0.24em;
+  text-shadow: 0 0 8px var(--blood-glow);
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -75,10 +102,11 @@ body.corner > * {
 
 .kicker {
   max-width: none;
-  color: var(--ash);
+  color: var(--blood-bright);
   font-family: var(--serif);
   font-size: 0.8rem;
   letter-spacing: 0.34em;
+  text-shadow: 0 0 9px var(--blood-glow);
   text-transform: uppercase;
 }
 
@@ -87,15 +115,15 @@ body.corner > * {
   font-size: clamp(2.9rem, 17vw, 4.6rem);
   font-weight: 400;
   line-height: 1;
-  color: var(--bone);
+  color: #f2e9ec;
   letter-spacing: 0.01em;
   text-shadow:
-    0 0 28px rgba(163, 22, 46, 0.5),
-    0 2px 0 #000;
+    0 0 30px rgba(255, 0, 0, 0.45),
+    4px 3px 0 #000;
 }
 
 .cursor {
-  color: var(--ink-red-bright);
+  color: var(--blood-bright);
   animation: blink 1.2s steps(1) infinite;
 }
 
@@ -121,6 +149,10 @@ body.corner > * {
   image-rendering: pixelated;
 }
 
+.blinkies img:hover {
+  animation: shake 0.7s linear infinite;
+}
+
 .corner-main {
   display: grid;
   gap: 1.1rem;
@@ -130,25 +162,28 @@ body.corner > * {
 }
 
 .card {
-  padding: 1.15rem 1.2rem;
-  border: 1px solid var(--hair);
-  border-left: 2px solid var(--ink-red);
-  border-radius: 2px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%), var(--slab);
+  padding: 0 0 1rem;
+  border: 1px solid var(--blood);
+  box-shadow: 4px 3px var(--blood);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .card h2 {
-  margin: 0 0 0.75rem;
-  color: var(--ink-red-bright);
-  font-family: var(--serif);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
+  margin: 0 0 0.9rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(91deg, rgba(94, 3, 3, 0.78), transparent);
+  color: var(--blood-bright);
+  font-family: 'Grenze Gotisch', var(--serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-shadow: 3px 2px #000;
   text-transform: uppercase;
 }
 
 .card p {
   max-width: none;
+  padding: 0 1rem;
   color: var(--bone);
   line-height: 1.7;
 }
@@ -158,6 +193,7 @@ dl {
   grid-template-columns: auto 1fr;
   gap: 0.5rem 0.9rem;
   margin: 0;
+  padding: 0 1rem;
 }
 
 dt {
@@ -175,7 +211,7 @@ dd {
 
 .toys {
   margin: 0.6rem 0 0;
-  padding-left: 1.1rem;
+  padding-left: 2rem;
   color: var(--bone);
 }
 
@@ -184,7 +220,7 @@ dd {
 }
 
 .toys li::marker {
-  color: var(--ink-red);
+  color: var(--blood-bright);
 }
 
 .corner-foot {
@@ -207,19 +243,33 @@ dd {
 
 .stat-count {
   padding: 0.3rem 0.55rem;
-  border: 1px solid var(--hair);
+  border: 1px solid var(--blood);
+  box-shadow: 3px 2px var(--blood);
   background: #000;
   color: var(--bone);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.12em;
 }
 
+a {
+  color: var(--blood-bright);
+  text-decoration: line-through;
+  text-decoration-style: dashed;
+  text-decoration-color: #971919;
+  text-shadow: 0 0 8px var(--blood-glow);
+}
+
+a:hover,
+a:focus-visible {
+  color: #e31515;
+}
+
 .back a {
-  color: var(--ink-red-bright);
+  color: var(--blood-bright);
   font-family: var(--serif);
   font-size: 0.98rem;
   text-decoration: none;
-  border-bottom: 1px dotted rgba(194, 73, 92, 0.6);
+  border-bottom: 1px dotted rgba(151, 25, 25, 0.7);
 }
 
 .fineprint {
@@ -238,10 +288,11 @@ dd {
 
 .credits a {
   color: var(--ash);
+  text-shadow: none;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--ink-red-bright);
+  outline: 2px solid var(--blood-bright);
   outline-offset: 3px;
 }
 
@@ -254,6 +305,27 @@ a:focus-visible {
 @keyframes blink {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  20% {
+    transform: translate(-2px, 1px) rotate(-1deg);
+  }
+  40% {
+    transform: translate(2px, -1px) rotate(1deg);
+  }
+  60% {
+    transform: translate(-1px, 2px) rotate(0deg);
+  }
+  80% {
+    transform: translate(2px, 1px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(-1px, -1px) rotate(0deg);
   }
 }
 
@@ -273,7 +345,8 @@ a:focus-visible {
     animation: none;
   }
 
-  .cursor {
+  .cursor,
+  .blinkies img:hover {
     animation: none;
   }
 }
