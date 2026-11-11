@@ -24,6 +24,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Write site stats
+        run: |
+          paths=('*.html' '*.css' '*.js' '*.json' '*.jsonl' '*.yml' '*.yaml')
+          lines=$(git ls-files -z "${paths[@]}" | xargs -0 cat | wc -l)
+          files=$(git ls-files "${paths[@]}" | wc -l)
+          printf '{"lines": %d, "files": %d, "generated": "%s"}\n' \
+            "$lines" "$files" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > public/stats.json
+          cat public/stats.json
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
