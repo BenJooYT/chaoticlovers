@@ -33,6 +33,23 @@ jobs:
             "$lines" "$files" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > public/stats.json
           cat public/stats.json
 
+      - name: Write history feed
+        run: |
+          git log --date=short --pretty=format:'%h%x1f%ad%x1f%s%x1e' HEAD \
+            | python3 -c '
+          import json, sys
+          raw = sys.stdin.read()
+          commits = []
+          for chunk in raw.split("\x1e"):
+              chunk = chunk.strip()
+              if not chunk:
+                  continue
+              sha, date, subject = chunk.split("\x1f", 2)
+              commits.append({"sha": sha, "date": date, "subject": subject})
+          print(json.dumps({"commits": commits[:40]}))
+          ' > public/history.json
+          head -c 300 public/history.json; echo
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
