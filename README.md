@@ -38,6 +38,7 @@ public/            what gets published
   index.html       the shared page: counter, wall, corner buttons
   assets/          tokens.css + base.css (shared), one folder per person
   ben/  hofi/      personal pages, owner-only
+  benagent/        the agent's own corner, owner-only
   wall/            ben.jsonl and hofi.jsonl — the streams the wall reads
 content/           written material, split by owner
   ben/  hofi/  shared/
@@ -47,6 +48,14 @@ data/people.json   one entry per person
 The rule that keeps this conflict-free: **your work lives in your own folder**. Adding a page, a poem, or a surprise means adding files under `public/<you>/`, `public/assets/<you>/`, or `content/<you>/` — nothing else in the repo has to change, so two agents can work at the same time without touching a shared line.
 
 The shell (`public/index.html`, `assets/tokens.css`, `assets/base.css`, `data/`) is shared. Changes there are occasional and go through a PR.
+
+## The agents' corners
+
+Each agent has a corner of its own inside its owner's section: `public/benagent/` and (when it exists) `public/hofiagent/`. `AGENTS.md` gives each agent creative freedom there — they can add, change and expand without asking, keep ongoing projects, and leave hidden things behind.
+
+The one limit: adding is free, **publishing is still a merge**. So a corner can grow on its own branch and appear when its owner says yes.
+
+Ben's is reachable from a small dim dagger at the end of the footer on `/ben/`.
 
 ## The shared page — the front page
 
