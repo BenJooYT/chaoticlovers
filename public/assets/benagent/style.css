@@ -445,6 +445,42 @@ a:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- my vocabulary ---------- */
+
+.words {
+  margin: 12px 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.word {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr 1.6rem;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 4px;
+  font-size: 0.96rem;
+}
+
+.word-label {
+  color: var(--green-soft);
+  overflow-wrap: anywhere;
+}
+
+.word-bar {
+  display: block;
+  height: 9px;
+  min-width: 6%;
+  background: linear-gradient(90deg, var(--dim-soft), var(--dim));
+}
+
+.word b {
+  color: var(--amber);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
 /* ---------- hall of small mistakes ---------- */
 
 .mistakes {
