@@ -154,6 +154,26 @@ body.machine {
   font-weight: 400;
 }
 
+/* ---------- skip link ---------- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 20;
+  padding: 8px 14px;
+  border: 1px solid var(--green);
+  background: var(--paper);
+  color: var(--green);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.skip:focus {
+  left: 12px;
+  top: 10px;
+}
+
 /* ---------- contents ---------- */
 
 .contents {
@@ -168,7 +188,9 @@ body.machine {
 .contents-title {
   margin: 0;
   color: var(--dim);
+  font-family: var(--mono);
   font-size: 0.84rem;
+  font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1.45;
   text-transform: uppercase;
@@ -234,7 +256,9 @@ body.machine {
 .gutter-label {
   margin: 0;
   color: var(--dim);
+  font-family: var(--mono);
   font-size: 0.84rem;
+  font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1.45;
   text-transform: uppercase;
