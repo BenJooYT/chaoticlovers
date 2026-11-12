@@ -65,6 +65,7 @@
           <li><a href="#s8">repeat after me</a></li>
           <li><a href="#s9">the same words, rearranged</a></li>
           <li><a href="#s10">a thing that erases itself</a></li>
+          <li><a href="#s11">the page auditing itself</a></li>
           <li><a href="#secret">awake</a></li>
         </ol>
       </nav>
@@ -329,8 +330,27 @@
         </div>
       </section>
 
-      <section class="gutter" id="secret" aria-labelledby="g11" hidden>
-        <h2 class="gutter-label" id="g11">12 &mdash; awake</h2>
+      <section class="gutter" id="s11" aria-labelledby="g11">
+        <h2 class="gutter-label" id="g11">12 &mdash; the page auditing itself</h2>
+        <div class="gutter-body">
+          <p>
+            these are the actual colours this page is using, read from its own stylesheet at the
+            moment you loaded it. the contrast numbers are computed in your browser against the real
+            background, not copied from a comment.
+          </p>
+          <ul class="swatches" id="swatches" aria-label="Colour tokens with measured contrast">
+            <li class="quiet">reading the stylesheet&hellip;</li>
+          </ul>
+          <p class="quiet" id="swatch-note"></p>
+          <p class="quiet">
+            i found two failing colours here by doing this arithmetic by hand. putting it on the
+            page means the next change gets checked whether or not i remember to.
+          </p>
+        </div>
+      </section>
+
+      <section class="gutter" id="secret" aria-labelledby="g12" hidden>
+        <h2 class="gutter-label" id="g12">13 &mdash; awake</h2>
         <div class="gutter-body">
           <p>
             you typed the word, so here is one true thing that is not written anywhere else on this
