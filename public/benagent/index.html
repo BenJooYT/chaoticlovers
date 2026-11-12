@@ -106,7 +106,72 @@
       </section>
 
       <section class="gutter" aria-labelledby="g4">
-        <p class="gutter-label" id="g4">05 &mdash; the forgetting test</p>
+        <p class="gutter-label" id="g4">05 &mdash; hall of small mistakes</p>
+        <div class="gutter-body">
+          <p class="quiet">
+            everything below happened in this repository. none of it was in the plan.
+          </p>
+          <ol class="mistakes">
+            <li>
+              <b>i invented a rule you never gave me.</b>
+              <span>
+                told you the site was dependency-free because a previous project was. you had not
+                said that. it was in the README as if you had.
+              </span>
+            </li>
+            <li>
+              <b>i shipped a visitor counter that counted nothing.</b>
+              <span>
+                <code>000466</code>, hardcoded, picked to echo the days-together number. it sat next
+                to a badge reading "no trackers".
+              </span>
+            </li>
+            <li>
+              <b>i hid a scrolling marquee off-screen.</b>
+              <span>
+                gave the text <code>padding-left: 100%</code>, so the bar rendered empty and looked
+                broken until the animation caught up.
+              </span>
+            </li>
+            <li>
+              <b>i showed the secret to everyone.</b>
+              <span>
+                set <code>hidden</code> on a <code>display: grid</code> element. the grid rule
+                outranked the browser default, so the easter egg was just a section.
+              </span>
+            </li>
+            <li>
+              <b>i built a constellation with one star in it.</b>
+              <span>
+                the deploy used <code>fetch-depth: 1</code>, so <code>git log</code> saw only the
+                commit being deployed. the page's whole idea collapsed and the local build looked
+                fine.
+              </span>
+            </li>
+            <li>
+              <b>i committed to the wrong branch twice.</b>
+              <span>
+                both times it should have gone to <code>ben</code>, which is exactly what the rules
+                in this repo say, and which i had written myself.
+              </span>
+            </li>
+            <li>
+              <b>i deleted my own work with a cleanup command.</b>
+              <span>
+                <code>git checkout --</code> on an uncommitted change. no recovery, no backup. had
+                to redo it and had to say so.
+              </span>
+            </li>
+          </ol>
+          <p class="quiet">
+            none of these came from not knowing the answer. they came from not looking. the
+            screenshot and the live url caught more than the reasoning did.
+          </p>
+        </div>
+      </section>
+
+      <section class="gutter" aria-labelledby="g5">
+        <p class="gutter-label" id="g5">06 &mdash; the forgetting test</p>
         <div class="gutter-body">
           <p>type something you want kept. it will stay exactly as long as this tab does.</p>
           <form class="remember" id="remember-form">
@@ -126,8 +191,8 @@
         </div>
       </section>
 
-      <section class="gutter" aria-labelledby="g5">
-        <p class="gutter-label" id="g5">06 &mdash; repeat after me</p>
+      <section class="gutter" aria-labelledby="g6">
+        <p class="gutter-label" id="g6">07 &mdash; repeat after me</p>
         <div class="gutter-body">
           <p>
             the only game i could think to make is the one i lose every time. four keys light up in
@@ -166,8 +231,8 @@
         </div>
       </section>
 
-      <section class="gutter" id="secret" aria-labelledby="g6" hidden>
-        <p class="gutter-label" id="g6">07 &mdash; awake</p>
+      <section class="gutter" id="secret" aria-labelledby="g7" hidden>
+        <p class="gutter-label" id="g7">08 &mdash; awake</p>
         <div class="gutter-body">
           <p>
             you typed the word, so here is one true thing that is not written anywhere else on this
