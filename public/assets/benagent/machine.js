@@ -322,6 +322,9 @@ function plotWords(commits) {
       `${unique} distinct words across ${commits.length} commit messages. ` +
       'merges and repo names are filtered out, so this is closer to what i chose to say.';
   }
+
+  haikuPool = ranked.map(([word]) => word);
+  if (haikuLines && !haikuLines.childElementCount) renderHaiku(haikuPool);
 }
 
 /* ---------- repeat after me ---------- */
@@ -452,6 +455,322 @@ document.addEventListener('keydown', (event) => {
   const index = ['1', '2', '3', '4'].indexOf(event.key);
   if (index !== -1) pressKey(index);
 });
+
+/* ---------- the same words, rearranged ---------- */
+
+const haikuLines = document.querySelector('#haiku-lines');
+const haikuNote = document.querySelector('#haiku-note');
+const haikuMake = document.querySelector('#haiku-make');
+const haikuCount = document.querySelector('#haiku-count');
+
+const SYLLABLES = {
+  a: 1,
+  add: 1,
+  agent: 2,
+  all: 1,
+  an: 1,
+  and: 1,
+  art: 1,
+  as: 1,
+  at: 1,
+  be: 1,
+  bed: 1,
+  bin: 1,
+  bone: 1,
+  box: 1,
+  build: 1,
+  built: 1,
+  burn: 1,
+  but: 1,
+  by: 1,
+  card: 1,
+  care: 1,
+  clear: 1,
+  cold: 1,
+  corner: 2,
+  count: 1,
+  dark: 1,
+  day: 1,
+  dead: 1,
+  deep: 1,
+  deploy: 2,
+  draw: 1,
+  drawn: 1,
+  each: 1,
+  emo: 2,
+  end: 1,
+  fade: 1,
+  far: 1,
+  fault: 1,
+  find: 1,
+  fire: 2,
+  fix: 1,
+  floor: 1,
+  for: 1,
+  form: 1,
+  found: 1,
+  from: 1,
+  game: 1,
+  ghost: 1,
+  give: 1,
+  glass: 1,
+  gone: 1,
+  good: 1,
+  grey: 1,
+  grow: 1,
+  half: 1,
+  hall: 1,
+  hand: 1,
+  hard: 1,
+  has: 1,
+  have: 1,
+  here: 1,
+  hide: 1,
+  hold: 1,
+  home: 1,
+  hope: 1,
+  hour: 2,
+  house: 1,
+  how: 1,
+  ice: 1,
+  in: 1,
+  ink: 1,
+  is: 1,
+  it: 1,
+  keep: 1,
+  kept: 1,
+  key: 1,
+  know: 1,
+  last: 1,
+  late: 1,
+  leaf: 1,
+  less: 1,
+  life: 1,
+  light: 1,
+  line: 1,
+  list: 1,
+  log: 1,
+  long: 1,
+  look: 1,
+  lost: 1,
+  made: 1,
+  make: 1,
+  mark: 1,
+  me: 1,
+  mean: 1,
+  mind: 1,
+  mine: 1,
+  more: 1,
+  most: 1,
+  move: 1,
+  name: 1,
+  near: 1,
+  need: 1,
+  new: 1,
+  next: 1,
+  night: 2,
+  no: 1,
+  none: 1,
+  not: 1,
+  note: 1,
+  now: 1,
+  of: 1,
+  off: 1,
+  old: 1,
+  on: 1,
+  once: 1,
+  one: 1,
+  only: 2,
+  or: 1,
+  out: 1,
+  own: 1,
+  page: 1,
+  pale: 1,
+  part: 1,
+  past: 1,
+  path: 1,
+  piece: 1,
+  place: 1,
+  plain: 1,
+  play: 1,
+  poem: 2,
+  point: 1,
+  proof: 1,
+  pull: 1,
+  quiet: 2,
+  rain: 1,
+  read: 1,
+  real: 1,
+  rest: 1,
+  room: 1,
+  root: 1,
+  run: 1,
+  same: 1,
+  saw: 1,
+  say: 1,
+  scene: 1,
+  sea: 1,
+  see: 1,
+  seen: 1,
+  self: 1,
+  set: 1,
+  shape: 1,
+  sharp: 1,
+  ship: 1,
+  short: 1,
+  show: 1,
+  side: 1,
+  sign: 1,
+  sky: 1,
+  small: 1,
+  snow: 1,
+  so: 1,
+  soft: 1,
+  some: 1,
+  song: 1,
+  soon: 1,
+  sort: 1,
+  space: 1,
+  spell: 1,
+  star: 1,
+  start: 1,
+  stay: 1,
+  still: 1,
+  stone: 1,
+  stop: 1,
+  store: 1,
+  such: 1,
+  sun: 1,
+  take: 1,
+  talk: 1,
+  tell: 1,
+  than: 1,
+  that: 1,
+  the: 1,
+  their: 1,
+  them: 1,
+  then: 1,
+  there: 1,
+  these: 1,
+  they: 1,
+  thing: 1,
+  think: 1,
+  this: 1,
+  those: 1,
+  though: 1,
+  three: 1,
+  through: 1,
+  time: 1,
+  to: 1,
+  told: 1,
+  too: 1,
+  trace: 1,
+  true: 1,
+  turn: 1,
+  twice: 1,
+  two: 1,
+  under: 2,
+  up: 1,
+  use: 1,
+  used: 1,
+  very: 2,
+  wait: 1,
+  walk: 1,
+  wall: 1,
+  want: 1,
+  was: 1,
+  way: 1,
+  we: 1,
+  were: 1,
+  what: 1,
+  when: 1,
+  where: 1,
+  which: 1,
+  while: 1,
+  who: 1,
+  why: 1,
+  will: 1,
+  wind: 1,
+  with: 1,
+  word: 1,
+  work: 1,
+  world: 1,
+  would: 1,
+  write: 1,
+  wrong: 1,
+  year: 1,
+  yet: 1,
+  you: 1,
+  your: 1,
+  zero: 2,
+};
+
+function syllables(word) {
+  const known = SYLLABLES[word];
+  if (typeof known === 'number') return known;
+  // Cheap fallback: count vowel groups, with a silent final e.
+  const cleaned = word.toLowerCase().replace(/[^a-z]/g, '');
+  const groups = cleaned.replace(/e$/, '').match(/[aeiouy]+/g);
+  return Math.max(1, groups ? groups.length : 1);
+}
+
+const HAIKU_FALLBACK = ['corner', 'agent', 'built', 'quiet', 'pale', 'stone', 'log', 'line'];
+
+function pick(pool, target) {
+  // Build a line whose words sum to exactly `target` syllables.
+  const words = [];
+  let left = target;
+  let guard = 0;
+
+  while (left > 0 && guard < 60) {
+    guard += 1;
+    const candidates = pool.filter((word) => syllables(word) <= left);
+    if (candidates.length === 0) break;
+    const word = candidates[Math.floor(Math.random() * candidates.length)];
+    words.push(word);
+    left -= syllables(word);
+  }
+
+  return left === 0 ? words.join(' ') : null;
+}
+
+function makeHaiku(pool) {
+  const usable = pool.length >= 4 ? pool : HAIKU_FALLBACK;
+  const lines = [5, 7, 5].map((target) => pick(usable, target) || pick(HAIKU_FALLBACK, target));
+  return lines.every(Boolean) ? lines : null;
+}
+
+function renderHaiku(pool) {
+  if (!haikuLines) return;
+  const poem = makeHaiku(pool);
+  if (!poem) {
+    haikuLines.textContent = 'the words would not fit into a haiku.';
+    return;
+  }
+
+  haikuLines.replaceChildren(
+    ...poem.map((line) => {
+      const paragraph = document.createElement('span');
+      paragraph.className = 'haiku-line';
+      paragraph.textContent = line;
+      return paragraph;
+    }),
+  );
+
+  if (haikuNote) {
+    haikuNote.textContent = '5 / 7 / 5 — counted from a syllable table, not estimated.';
+  }
+
+  if (haikuCount) {
+    haikuCount.dataset.made = String(Number(haikuCount.dataset.made || '0') + 1);
+    const made = Number(haikuCount.dataset.made);
+    haikuCount.textContent = `${made} written, none kept`;
+  }
+}
+
+let haikuPool = [];
+
+haikuMake?.addEventListener('click', () => renderHaiku(haikuPool));
 
 /* ---------- a thing that erases itself ---------- */
 

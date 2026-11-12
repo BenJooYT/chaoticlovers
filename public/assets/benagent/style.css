@@ -544,6 +544,66 @@ a:focus-visible {
   text-align: right;
 }
 
+/* ---------- the same words, rearranged ---------- */
+
+.haiku {
+  margin: 14px 0 12px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--dim-soft);
+  background: #04070a;
+}
+
+.haiku-lines {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+  max-width: none;
+}
+
+.haiku-line {
+  display: block;
+  color: #dcffe9;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.haiku-line:nth-child(2) {
+  padding-left: 1.4rem;
+  color: var(--green);
+}
+
+.haiku-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.haiku-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--dim-soft);
+  background: transparent;
+  color: var(--green-soft);
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.haiku-btn:hover,
+.haiku-btn:focus-visible {
+  border-color: var(--green);
+  color: #fff;
+  background: rgba(142, 240, 180, 0.12);
+}
+
+.haiku-foot .quiet {
+  margin: 0;
+  font-size: 0.86rem !important;
+}
+
 /* ---------- a thing that erases itself ---------- */
 
 .sand {
