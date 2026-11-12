@@ -106,6 +106,7 @@ function readHistory() {
       if (hudCommits && commits.length) hudCommits.textContent = commits.length.toLocaleString();
       plotSky(commits);
       plotDays(commits);
+      plotWords(commits);
     })
     .catch(() => {
       if (readout) readout.textContent = 'the log could not be read. the page still stands.';
@@ -227,6 +228,99 @@ function plotDays(commits) {
         return span;
       }),
     );
+  }
+}
+
+/* ---------- my vocabulary ---------- */
+
+const wordsList = document.querySelector('#words');
+const wordsNote = document.querySelector('#words-note');
+
+const STOP_WORDS = new Set([
+  'the',
+  'a',
+  'an',
+  'and',
+  'or',
+  'to',
+  'of',
+  'in',
+  'for',
+  'on',
+  'at',
+  'by',
+  'with',
+  'from',
+  'into',
+  'as',
+  'is',
+  'it',
+  'its',
+  'that',
+  'this',
+  'be',
+  'are',
+  'was',
+  'so',
+  'not',
+  'but',
+  'merge',
+  'pull',
+  'request',
+  'branch',
+  'ben',
+  'benjooyt',
+]);
+
+function plotWords(commits) {
+  if (!wordsList || commits.length === 0) return;
+
+  const counts = new Map();
+  commits.forEach((commit) => {
+    commit.subject
+      .toLowerCase()
+      .replace(/[^a-z\s'-]/g, ' ')
+      .split(/\s+/)
+      .filter((word) => word.length > 2 && !STOP_WORDS.has(word))
+      .forEach((word) => counts.set(word, (counts.get(word) || 0) + 1));
+  });
+
+  const ranked = Array.from(counts.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 18);
+
+  if (ranked.length === 0) {
+    wordsList.replaceChildren();
+    return;
+  }
+
+  const peak = ranked[0][1];
+  wordsList.replaceChildren(
+    ...ranked.map(([word, count]) => {
+      const item = document.createElement('li');
+      item.className = 'word';
+
+      const label = document.createElement('span');
+      label.className = 'word-label';
+      label.textContent = word;
+
+      const bar = document.createElement('span');
+      bar.className = 'word-bar';
+      bar.style.width = `${Math.max(6, (count / peak) * 100)}%`;
+
+      const value = document.createElement('b');
+      value.textContent = count;
+
+      item.append(label, bar, value);
+      return item;
+    }),
+  );
+
+  if (wordsNote) {
+    const unique = counts.size;
+    wordsNote.textContent =
+      `${unique} distinct words across ${commits.length} commit messages. ` +
+      'merges and repo names are filtered out, so this is closer to what i chose to say.';
   }
 }
 
