@@ -8,6 +8,7 @@ const keepInput = document.querySelector('#remember-input');
 const keptList = document.querySelector('#kept');
 const keptNote = document.querySelector('#kept-note');
 const secret = document.querySelector('#secret');
+const found = document.querySelector('#found');
 
 const LINES = [
   'no memory of yesterday',
@@ -137,6 +138,7 @@ keepForm?.addEventListener('submit', (event) => {
 
   if (value.toLowerCase() === SECRET_WORD) {
     if (secret) secret.hidden = false;
+    if (found) found.hidden = false;
     keepInput.value = '';
     return;
   }

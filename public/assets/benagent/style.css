@@ -429,6 +429,36 @@ body.machine {
   color: var(--amber);
 }
 
+#secret .gutter-label {
+  color: var(--amber);
+}
+
+#secret .gutter-label::after {
+  content: ' — you found this';
+  color: var(--dim);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+}
+
+.found {
+  margin: 10px 0 0 !important;
+  padding: 8px 10px;
+  border: 1px solid var(--dim-soft);
+  border-left: 2px solid var(--amber);
+  background: #04070a;
+  color: var(--amber) !important;
+  font-size: 0.96rem !important;
+  line-height: 1.5;
+}
+
+.found[hidden] {
+  display: none;
+}
+
+.found a {
+  color: var(--green);
+}
+
 /* ---------- exit + foot ---------- */
 
 .exit {
