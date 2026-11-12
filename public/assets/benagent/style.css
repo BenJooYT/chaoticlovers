@@ -130,6 +130,30 @@ body.machine {
   line-height: 1.62;
 }
 
+.terms {
+  max-width: 34em;
+  margin: 22px 0 0;
+  padding: 14px 0 0 16px;
+  border-top: 1px solid var(--rule);
+  border-left: 2px solid var(--dim-soft);
+}
+
+.terms p {
+  margin: 0 0 10px;
+  color: var(--green-soft);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+.terms p:last-child {
+  margin-bottom: 0;
+}
+
+.terms b {
+  color: var(--amber);
+  font-weight: 400;
+}
+
 /* ---------- gutters ---------- */
 
 .gutter {
