@@ -37,3 +37,4 @@ venv/
 
 # Generated at deploy time by pages.yml, never committed
 public/stats.json
+public/history.json
