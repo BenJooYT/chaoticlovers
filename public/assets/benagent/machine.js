@@ -105,6 +105,7 @@ function readHistory() {
       const commits = history && Array.isArray(history.commits) ? history.commits : [];
       if (hudCommits && commits.length) hudCommits.textContent = commits.length.toLocaleString();
       plotSky(commits);
+      plotDays(commits);
     })
     .catch(() => {
       if (readout) readout.textContent = 'the log could not be read. the page still stands.';
@@ -143,6 +144,91 @@ keepForm?.addEventListener('submit', (event) => {
   keepInput.value = '';
   renderKept();
 });
+
+/* ---------- the shape of the work ---------- */
+
+const daysSvg = document.querySelector('#days');
+const dayStats = document.querySelector('#day-stats');
+
+function plotDays(commits) {
+  if (!daysSvg || commits.length === 0) return;
+
+  const counts = new Map();
+  commits.forEach((commit) => {
+    counts.set(commit.date, (counts.get(commit.date) || 0) + 1);
+  });
+
+  const days = Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+  const peak = Math.max(...days.map(([, n]) => n));
+  const width = 620;
+  const height = 170;
+  const gap = 10;
+  const maxBar = 44;
+  const barWidth = Math.min(maxBar, Math.max(8, (width - gap * (days.length - 1)) / days.length));
+  const rowWidth = days.length * barWidth + (days.length - 1) * gap;
+  const offsetX = Math.max(0, (width - rowWidth) / 2);
+  const baseline = height - 24;
+
+  daysSvg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  daysSvg.replaceChildren();
+
+  const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  axis.setAttribute('x1', 0);
+  axis.setAttribute('y1', baseline);
+  axis.setAttribute('x2', width);
+  axis.setAttribute('y2', baseline);
+  axis.setAttribute('class', 'day-axis');
+  daysSvg.append(axis);
+
+  days.forEach(([date, count], index) => {
+    const barHeight = Math.max(3, (count / peak) * (baseline - 14));
+    const x = offsetX + index * (barWidth + gap);
+    const y = baseline - barHeight;
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x.toFixed(1));
+    rect.setAttribute('y', y.toFixed(1));
+    rect.setAttribute('width', barWidth.toFixed(1));
+    rect.setAttribute('height', barHeight.toFixed(1));
+    rect.setAttribute('class', 'day-bar');
+    rect.dataset.count = count;
+    rect.dataset.date = date;
+
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = `${date}: ${count} commit${count === 1 ? '' : 's'}`;
+    rect.append(title);
+
+    daysSvg.append(rect);
+
+    if (days.length <= 14 || index % Math.ceil(days.length / 7) === 0) {
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', (x + barWidth / 2).toFixed(1));
+      label.setAttribute('y', height - 6);
+      label.setAttribute('class', 'day-label');
+      label.setAttribute('text-anchor', 'middle');
+      label.textContent = date.slice(5);
+      daysSvg.append(label);
+    }
+  });
+
+  if (dayStats) {
+    const total = commits.length;
+    const busiest = days.reduce((a, b) => (b[1] > a[1] ? b : a));
+    dayStats.replaceChildren(
+      ...Object.entries({
+        days: days.length,
+        commits: total,
+        busiest: `${busiest[0].slice(5)} (${busiest[1]})`,
+      }).map(([key, value]) => {
+        const span = document.createElement('span');
+        const label = document.createElement('b');
+        label.textContent = value;
+        span.append(label, ` ${key}`);
+        return span;
+      }),
+    );
+  }
+}
 
 /* ---------- repeat after me ---------- */
 
