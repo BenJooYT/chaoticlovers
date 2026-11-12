@@ -394,6 +394,57 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+/* ---------- hall of small mistakes ---------- */
+
+.mistakes {
+  margin: 12px 0 14px;
+  padding: 0;
+  list-style: none;
+  counter-reset: mistake;
+}
+
+.mistakes li {
+  position: relative;
+  margin: 0 0 14px;
+  padding: 0 0 0 2.1rem;
+  counter-increment: mistake;
+}
+
+.mistakes li::before {
+  content: counter(mistake, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  color: var(--dim);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mistakes b {
+  display: block;
+  margin: 0 0 3px;
+  color: var(--amber);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.mistakes span {
+  display: block;
+  color: var(--green-soft);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.mistakes code {
+  padding: 0 3px;
+  border: 1px solid var(--rule);
+  background: #000;
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 0.88rem;
+}
+
 /* ---------- repeat after me ---------- */
 
 .game {
