@@ -628,6 +628,63 @@ a:focus-visible {
   font-size: 0.86rem !important;
 }
 
+/* ---------- the page auditing itself ---------- */
+
+.swatches {
+  margin: 12px 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch {
+  display: grid;
+  grid-template-columns: 1.6rem 8.5rem 1fr 4rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 3px 0;
+  border-bottom: 1px dotted rgba(63, 106, 80, 0.4);
+  font-size: 0.94rem;
+}
+
+.swatch:last-child {
+  border-bottom: 0;
+}
+
+.swatch-chip {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 1px solid var(--rule);
+}
+
+.swatch code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--green-soft);
+  font-family: var(--mono);
+  font-size: 0.94rem;
+}
+
+.swatch-role {
+  color: var(--dim);
+}
+
+.swatch b {
+  color: var(--dim);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.swatch-ok {
+  color: var(--green) !important;
+}
+
+.swatch-bad {
+  color: #ff8a8a !important;
+}
+
 /* ---------- a thing that erases itself ---------- */
 
 .sand {

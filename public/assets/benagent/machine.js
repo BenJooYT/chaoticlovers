@@ -772,6 +772,120 @@ let haikuPool = [];
 
 haikuMake?.addEventListener('click', () => renderHaiku(haikuPool));
 
+/* ---------- the page auditing itself ---------- */
+
+const swatches = document.querySelector('#swatches');
+const swatchNote = document.querySelector('#swatch-note');
+
+const AUDIT_TOKENS = [
+  { name: '--green', role: 'headings and links', needs: 4.5 },
+  { name: '--green-soft', role: 'body text', needs: 4.5 },
+  { name: '--dim', role: 'labels and quiet text', needs: 4.5 },
+  { name: '--amber', role: 'accents', needs: 4.5 },
+  { name: '--dim-soft', role: 'borders and rings', needs: 3 },
+];
+
+function parseColor(value) {
+  const match = value.trim().match(/^#([0-9a-f]{3,8})$/i);
+  if (!match) return null;
+  let hex = match[1];
+  if (hex.length === 3)
+    hex = hex
+      .split('')
+      .map((c) => c + c)
+      .join('');
+  if (hex.length !== 6) return null;
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16),
+  };
+}
+
+function channel(v) {
+  const s = v / 255;
+  return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+}
+
+function luminance(color) {
+  return 0.2126 * channel(color.r) + 0.7152 * channel(color.g) + 0.0722 * channel(color.b);
+}
+
+function contrast(a, b) {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+function readTokens() {
+  const root = getComputedStyle(document.documentElement);
+  const background = parseColor(root.getPropertyValue('--paper')) || { r: 7, g: 11, b: 14 };
+
+  const rows = AUDIT_TOKENS.map((token) => {
+    const raw = root.getPropertyValue(token.name);
+    const color = parseColor(raw);
+    if (!color) return null;
+    return {
+      name: token.name,
+      role: token.role,
+      raw: raw.trim(),
+      color,
+      needs: token.needs,
+      ratio: contrast(color, background),
+    };
+  }).filter(Boolean);
+
+  return { rows, background };
+}
+
+function renderSwatches() {
+  if (!swatches) return;
+
+  const { rows, background } = readTokens();
+  if (rows.length === 0) {
+    swatches.replaceChildren();
+    return;
+  }
+
+  swatches.replaceChildren(
+    ...rows.map((row) => {
+      const item = document.createElement('li');
+      item.className = 'swatch';
+
+      const chip = document.createElement('span');
+      chip.className = 'swatch-chip';
+      chip.style.background = row.raw;
+      chip.setAttribute('aria-hidden', 'true');
+
+      const name = document.createElement('code');
+      name.textContent = row.name;
+
+      const role = document.createElement('span');
+      role.className = 'swatch-role';
+      role.textContent = row.role;
+
+      const ratio = document.createElement('b');
+      ratio.textContent = `${row.ratio.toFixed(2)}:1`;
+      const passes = row.ratio >= row.needs;
+      ratio.className = passes ? 'swatch-ok' : 'swatch-bad';
+      ratio.title = `${passes ? 'passes' : 'fails'} its ${row.needs}:1 requirement`;
+
+      item.append(chip, name, role, ratio);
+      return item;
+    }),
+  );
+
+  const failing = rows.filter((row) => row.ratio < row.needs);
+  if (swatchNote) {
+    const bgHex = `#${[background.r, background.g, background.b]
+      .map((v) => v.toString(16).padStart(2, '0'))
+      .join('')}`;
+    swatchNote.textContent =
+      failing.length === 0
+        ? `all ${rows.length} tokens clear their thresholds against ${bgHex}.`
+        : `${failing.length} of ${rows.length} tokens fall below the bar against ${bgHex}.`;
+  }
+}
+
 /* ---------- a thing that erases itself ---------- */
 
 const sandCanvas = document.querySelector('#sand-canvas');
@@ -886,4 +1000,5 @@ readStats();
 readHistory();
 renderKept();
 updateMeta();
+renderSwatches();
 initSand();
