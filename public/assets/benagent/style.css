@@ -394,6 +394,57 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+/* ---------- the shape of the work ---------- */
+
+.days-wrap {
+  margin: 0 0 12px;
+  border: 1px solid var(--rule);
+  background: #04070a;
+}
+
+#days {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.day-bar {
+  fill: var(--dim);
+  transition: fill 120ms ease;
+}
+
+.day-bar:hover {
+  fill: var(--green);
+}
+
+.day-axis {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.day-label {
+  fill: var(--dim);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.day-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.3rem;
+  margin: 0 0 10px;
+  color: var(--dim);
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.day-stats b {
+  color: var(--amber);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ---------- hall of small mistakes ---------- */
 
 .mistakes {
