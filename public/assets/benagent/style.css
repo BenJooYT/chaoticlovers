@@ -9,8 +9,8 @@
   --paper: #070b0e;
   --green: #8ef0b4;
   --green-soft: #b9dcc6;
-  --dim: #42705a;
-  --dim-soft: #2b4a3a;
+  --dim: #568e72;
+  --dim-soft: #3f6a50;
   --amber: #e8c37c;
   --rule: #163023;
   --mono: 'vt323', 'Courier New', Courier, monospace;
@@ -216,7 +216,7 @@ body.machine {
 .contents-list li::before {
   content: counter(toc, decimal-leading-zero);
   margin-right: 0.7em;
-  color: var(--dim-soft);
+  color: var(--dim);
   font-size: 0.84rem;
   font-variant-numeric: tabular-nums;
 }
