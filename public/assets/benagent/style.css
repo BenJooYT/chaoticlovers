@@ -394,6 +394,140 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+/* ---------- repeat after me ---------- */
+
+.game {
+  max-width: 22rem;
+  margin: 16px 0 14px;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  background: #04070a;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.key {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dim-soft);
+  background: #0a1410;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 1.35rem;
+  cursor: pointer;
+  transition:
+    background 90ms ease,
+    color 90ms ease,
+    border-color 90ms ease,
+    transform 90ms ease;
+  touch-action: manipulation;
+}
+
+.key span {
+  pointer-events: none;
+}
+
+.key:nth-child(1) {
+  border-color: #244a37;
+}
+
+.key:nth-child(2) {
+  border-color: #2a4a42;
+}
+
+.key:nth-child(3) {
+  border-color: #4a442a;
+}
+
+.key:nth-child(4) {
+  border-color: #4a2f2a;
+}
+
+.key:hover {
+  background: #101d16;
+  color: var(--green);
+}
+
+.key:focus-visible {
+  outline: 1px dotted var(--green);
+  outline-offset: 3px;
+}
+
+.key.lit {
+  border-color: var(--green);
+  background: var(--green);
+  color: #04070a;
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(142, 240, 180, 0.45);
+}
+
+.game[data-state='showing'] .key {
+  cursor: progress;
+}
+
+.game[data-state='over'] .key {
+  border-color: #4a2f2a;
+}
+
+.game-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.game-status {
+  flex: 1 1 8rem;
+  margin: 0;
+  color: var(--green-soft);
+  font-size: 0.96rem;
+}
+
+.game[data-state='over'] .game-status {
+  color: var(--amber);
+}
+
+.game-meta {
+  display: flex;
+  gap: 0.9rem;
+  color: var(--dim);
+  font-size: 0.86rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.game-meta b {
+  color: var(--amber);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.game-start {
+  padding: 5px 14px;
+  border: 1px solid var(--green);
+  background: transparent;
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 0.96rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.game-start:hover,
+.game-start:focus-visible {
+  background: rgba(142, 240, 180, 0.14);
+  color: #fff;
+}
+
 @keyframes caret {
   50% {
     opacity: 0;
