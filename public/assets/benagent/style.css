@@ -154,6 +154,69 @@ body.machine {
   font-weight: 400;
 }
 
+/* ---------- contents ---------- */
+
+.contents {
+  display: grid;
+  grid-template-columns: 11.5rem 1fr;
+  gap: 0 1.6rem;
+  margin: 0 0 6px;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.contents-title {
+  margin: 0;
+  color: var(--dim);
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.contents-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 3px 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+  font-size: 0.98rem;
+}
+
+.contents-list li {
+  padding-left: 1.9em;
+  counter-increment: toc;
+  text-indent: -1.9em;
+}
+
+.contents-list li::before {
+  content: counter(toc, decimal-leading-zero);
+  margin-right: 0.7em;
+  color: var(--dim-soft);
+  font-size: 0.84rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.contents-list a {
+  color: var(--green-soft);
+  text-decoration: none;
+}
+
+.contents-list a:hover,
+.contents-list a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+/* keep the sticky hud from covering a jumped-to heading */
+.gutter[id] {
+  scroll-margin-top: 4.5rem;
+}
+
 /* ---------- gutters ---------- */
 
 .gutter {
@@ -740,7 +803,8 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
-  .gutter {
+  .gutter,
+  .contents {
     grid-template-columns: 1fr;
     gap: 0.5rem 0;
   }
