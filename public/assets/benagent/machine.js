@@ -144,6 +144,135 @@ keepForm?.addEventListener('submit', (event) => {
   renderKept();
 });
 
+/* ---------- repeat after me ---------- */
+
+const game = document.querySelector('#game');
+const gameKeys = Array.from(document.querySelectorAll('.key'));
+const gameStatus = document.querySelector('#game-status');
+const gameRoundEl = document.querySelector('#game-round');
+const gameBestEl = document.querySelector('#game-best');
+const gameStart = document.querySelector('#game-start');
+
+const gameState = {
+  sequence: [],
+  input: [],
+  round: 0,
+  best: 0,
+  locked: true,
+  timers: [],
+};
+
+function setStatus(text) {
+  if (gameStatus) gameStatus.textContent = text;
+}
+
+function setGameState(state) {
+  if (game) game.dataset.state = state;
+}
+
+function clearTimers() {
+  gameState.timers.forEach((id) => clearTimeout(id));
+  gameState.timers = [];
+}
+
+function flash(keyIndex, duration = 260) {
+  const key = gameKeys[keyIndex];
+  if (!key) return;
+  key.classList.add('lit');
+  const id = setTimeout(() => key.classList.remove('lit'), duration);
+  gameState.timers.push(id);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    const id = setTimeout(resolve, ms);
+    gameState.timers.push(id);
+  });
+}
+
+function updateMeta() {
+  if (gameRoundEl) gameRoundEl.textContent = gameState.round;
+  if (gameBestEl) gameBestEl.textContent = gameState.best;
+}
+
+async function playSequence() {
+  setGameState('showing');
+  setStatus('watch');
+  await sleep(420);
+
+  for (const keyIndex of gameState.sequence) {
+    flash(keyIndex, 320);
+    await sleep(520);
+  }
+
+  gameState.input = [];
+  gameState.locked = false;
+  setGameState('input');
+  setStatus('your turn');
+}
+
+async function nextRound() {
+  gameState.round += 1;
+  updateMeta();
+  gameState.sequence.push(Math.floor(Math.random() * 4));
+  gameState.locked = true;
+  await sleep(260);
+  await playSequence();
+}
+
+function endRun() {
+  clearTimers();
+  gameState.locked = true;
+  gameState.best = Math.max(gameState.best, gameState.round - 1);
+  updateMeta();
+  setGameState('over');
+  setStatus(`wrong key. you held ${gameState.round - 1}.`);
+}
+
+async function pressKey(keyIndex) {
+  if (!gameState.locked) {
+    flash(keyIndex, 160);
+
+    const expected = gameState.sequence[gameState.input.length];
+    if (keyIndex !== expected) {
+      endRun();
+      return;
+    }
+
+    gameState.input.push(keyIndex);
+
+    if (gameState.input.length === gameState.sequence.length) {
+      gameState.locked = true;
+      setGameState('idle');
+      setStatus('good. longer next time.');
+      await sleep(760);
+      nextRound();
+    }
+  }
+}
+
+function startGame() {
+  clearTimers();
+  gameState.sequence = [];
+  gameState.input = [];
+  gameState.round = 0;
+  gameState.locked = true;
+  updateMeta();
+  nextRound();
+}
+
+gameKeys.forEach((keyEl) => {
+  keyEl.addEventListener('click', () => pressKey(Number(keyEl.dataset.key)));
+});
+
+gameStart?.addEventListener('click', startGame);
+
+document.addEventListener('keydown', (event) => {
+  if (!game) return;
+  const index = ['1', '2', '3', '4'].indexOf(event.key);
+  if (index !== -1) pressKey(index);
+});
+
 /* ---------- boot ---------- */
 
 if (typedEl) {
@@ -152,3 +281,4 @@ if (typedEl) {
 readStats();
 readHistory();
 renderKept();
+updateMeta();
