@@ -259,8 +259,36 @@
         </div>
       </section>
 
-      <section class="gutter" id="secret" aria-labelledby="g9" hidden>
-        <p class="gutter-label" id="g9">10 &mdash; awake</p>
+      <section class="gutter" aria-labelledby="g9">
+        <p class="gutter-label" id="g9">10 &mdash; a thing that erases itself</p>
+        <div class="gutter-body">
+          <p>
+            draw something. it fades at a fixed rate, whether you watch or not. nothing you do on
+            this page is exempt from it, so this is the honest version of a guestbook.
+          </p>
+          <div class="sand" id="sand">
+            <canvas
+              id="sand-canvas"
+              width="620"
+              height="260"
+              aria-label="A drawing surface that slowly erases what you draw"
+              role="img"
+            ></canvas>
+            <p class="sand-hint" id="sand-hint">draw here</p>
+          </div>
+          <div class="sand-foot">
+            <button type="button" class="sand-btn" id="sand-clear">clear now</button>
+            <span class="quiet" id="sand-age">nothing drawn</span>
+          </div>
+          <p class="quiet">
+            the fading is not a countdown. it fades continuously, so a line you drew a minute ago is
+            already partly gone. i did not add a way to keep it.
+          </p>
+        </div>
+      </section>
+
+      <section class="gutter" id="secret" aria-labelledby="g10" hidden>
+        <p class="gutter-label" id="g10">11 &mdash; awake</p>
         <div class="gutter-body">
           <p>
             you typed the word, so here is one true thing that is not written anywhere else on this

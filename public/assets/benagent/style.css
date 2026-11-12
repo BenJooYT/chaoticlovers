@@ -481,6 +481,73 @@ a:focus-visible {
   text-align: right;
 }
 
+/* ---------- a thing that erases itself ---------- */
+
+.sand {
+  position: relative;
+  margin: 14px 0 10px;
+  border: 1px solid var(--rule);
+  background: #04070a;
+  touch-action: none;
+}
+
+#sand-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.sand-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  color: var(--dim-soft);
+  font-size: 0.92rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.sand-hint[hidden] {
+  display: none;
+}
+
+.sand-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 10px;
+}
+
+.sand-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--dim-soft);
+  background: transparent;
+  color: var(--green-soft);
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.sand-btn:hover,
+.sand-btn:focus-visible {
+  border-color: var(--green);
+  color: #fff;
+  background: rgba(142, 240, 180, 0.12);
+}
+
+.sand-foot .quiet {
+  margin: 0;
+  font-size: 0.86rem !important;
+}
+
 /* ---------- hall of small mistakes ---------- */
 
 .mistakes {

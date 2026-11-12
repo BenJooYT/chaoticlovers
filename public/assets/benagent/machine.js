@@ -453,6 +453,111 @@ document.addEventListener('keydown', (event) => {
   if (index !== -1) pressKey(index);
 });
 
+/* ---------- a thing that erases itself ---------- */
+
+const sandCanvas = document.querySelector('#sand-canvas');
+const sandHint = document.querySelector('#sand-hint');
+const sandClear = document.querySelector('#sand-clear');
+const sandAge = document.querySelector('#sand-age');
+
+const sand = {
+  ctx: null,
+  drawing: false,
+  lastX: 0,
+  lastY: 0,
+  lastDrawnAt: 0,
+  running: false,
+};
+
+function sandPos(event) {
+  const rect = sandCanvas.getBoundingClientRect();
+  const point = event.touches ? event.touches[0] : event;
+  return {
+    x: ((point.clientX - rect.left) / rect.width) * sandCanvas.width,
+    y: ((point.clientY - rect.top) / rect.height) * sandCanvas.height,
+  };
+}
+
+function sandAgeText() {
+  if (!sandAge) return;
+  if (!sand.lastDrawnAt) {
+    sandAge.textContent = 'nothing drawn';
+    return;
+  }
+  const seconds = Math.round((Date.now() - sand.lastDrawnAt) / 1000);
+  sandAge.textContent =
+    seconds < 2 ? 'just now' : `${seconds}s since you drew — it is fainter already`;
+}
+
+function sandFade() {
+  if (!sand.ctx) return;
+  // A low-alpha fill each frame means old strokes decay at a steady rate.
+  sand.ctx.fillStyle = 'rgba(4, 7, 10, 0.012)';
+  sand.ctx.fillRect(0, 0, sandCanvas.width, sandCanvas.height);
+  requestAnimationFrame(sandFade);
+}
+
+function initSand() {
+  if (!sandCanvas || !sandCanvas.getContext) return;
+  sand.ctx = sandCanvas.getContext('2d');
+  sand.ctx.fillStyle = '#04070a';
+  sand.ctx.fillRect(0, 0, sandCanvas.width, sandCanvas.height);
+  sand.ctx.lineJoin = 'round';
+  sand.ctx.lineCap = 'round';
+
+  const start = (event) => {
+    event.preventDefault();
+    sand.drawing = true;
+    const { x, y } = sandPos(event);
+    sand.lastX = x;
+    sand.lastY = y;
+    if (sandHint) sandHint.hidden = true;
+  };
+
+  const move = (event) => {
+    if (!sand.drawing) return;
+    event.preventDefault();
+    const { x, y } = sandPos(event);
+    sand.ctx.strokeStyle = '#8ef0b4';
+    sand.ctx.lineWidth = 2.4;
+    sand.ctx.beginPath();
+    sand.ctx.moveTo(sand.lastX, sand.lastY);
+    sand.ctx.lineTo(x, y);
+    sand.ctx.stroke();
+    sand.lastX = x;
+    sand.lastY = y;
+    sand.lastDrawnAt = Date.now();
+    sandAgeText();
+  };
+
+  const end = () => {
+    sand.drawing = false;
+  };
+
+  sandCanvas.addEventListener('pointerdown', start);
+  sandCanvas.addEventListener('pointermove', move);
+  sandCanvas.addEventListener('pointerup', end);
+  sandCanvas.addEventListener('pointerleave', end);
+  sandCanvas.addEventListener('touchstart', start, { passive: false });
+  sandCanvas.addEventListener('touchmove', move, { passive: false });
+  sandCanvas.addEventListener('touchend', end);
+
+  sandClear?.addEventListener('click', () => {
+    sand.ctx.fillStyle = '#04070a';
+    sand.ctx.fillRect(0, 0, sandCanvas.width, sandCanvas.height);
+    sand.lastDrawnAt = 0;
+    if (sandHint) sandHint.hidden = false;
+    sandAgeText();
+  });
+
+  if (!sand.running) {
+    sand.running = true;
+    requestAnimationFrame(sandFade);
+  }
+
+  setInterval(sandAgeText, 2000);
+}
+
 /* ---------- boot ---------- */
 
 if (typedEl) {
@@ -462,3 +567,4 @@ readStats();
 readHistory();
 renderKept();
 updateMeta();
+initSand();
