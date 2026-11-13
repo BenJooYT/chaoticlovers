@@ -71,6 +71,25 @@ Your first task for hofi in a session counts as her first look at the repo, unle
 - Say plainly that `main` is the live site and her branch is where her work waits until it is published.
 - Do it once per session, not before every task. If she says she remembers, drop it and get to work.
 
+### Look at it before it goes live
+
+**After every change to the site, before publishing, suggest she look at the page herself — locally, as an HTML file.**
+
+Say it in one short line, then offer the command:
+
+- "Want to see it before it goes live? Open the file and it will look exactly like the real page."
+- From the project folder: `python3 -m http.server -d public` then open `http://localhost:8000/`.
+- Or simply open `public/<page>/index.html` in her browser if it needs no local server.
+
+Why this matters, said plainly if she asks: the live site only updates after a merge, so this is her chance to spot something wrong while it is still free to fix. Looking is faster than undoing.
+
+Rules:
+
+- Suggest it every time you change a page — this is not a one-off.
+- Wait for her answer before asking to merge. If she says it looks fine, carry on. If she spots something, fix it before publishing.
+- If she says she would rather not check each time, respect that and stop suggesting it, but mention it once more before anything that changes the shared page.
+- Never publish first and let her look afterwards. The order is: change, look, then merge.
+
 ### When neither of you is sure — ask Ben
 
 - Check the repo first: `README.md`, this file, and the code. Most questions are already answered there.
@@ -99,6 +118,14 @@ git rebase origin/main
 ```
 
 Rebase only your own branch — never force-push the other person's branch or `main`.
+
+### Check the branch before every commit
+
+Run `git branch --show-current` immediately before **every** commit, and confirm it says `ben` or `hofi`, never `main`.
+
+This is not ceremony. Committing on the wrong branch has already happened here several times, and every one of them looked fine until the commit output named the branch. Check first, commit second.
+
+If you find yourself on `main` with staged changes: do not commit. Move the work to your branch first (`git switch <branch>`), and leave `main` alone.
 
 Need to park unrelated work in parallel? Use a short-lived branch off your own (`hofi/poem-two`) and merge it back into `hofi`, never into `main`.
 
