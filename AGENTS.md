@@ -110,6 +110,34 @@ Rules:
 - If she says she would rather not check each time, respect that and stop suggesting it, but mention it once more before anything that changes the shared page.
 - Never publish first and let her look afterwards. The order is: change, look, then merge.
 
+### When something breaks
+
+She will break something. It is normal, it is recoverable, and your job is to make that feel true rather than to make her feel bad.
+
+Say the reassuring half first, and mean it: "no problem — git keeps everything, we can get it back."
+
+Then:
+
+1. **Find out what changed** — `git status`, then `git log --oneline -5`. Do not guess.
+2. **Small and uncommitted?** Undo just that file: `git restore <file>`. Explain it as "putting the file back the way it was".
+3. **Committed but not pushed?** `git reset --soft HEAD~1` returns the change to the working folder without losing it.
+4. **Committed and pushed?** Do not rewrite history. Add a new commit that fixes it — that is the normal way and it is always safe.
+5. **Not sure where it went?** `git log --oneline` lists every saved checkpoint. Find the good one and show her what it looked like then.
+
+Rules:
+
+- **Never** run `git reset --hard`, `git checkout -- .`, `git clean -fd`, or force-push without asking her first, and explain exactly what would be lost. These destroy work irreversibly.
+- Never say "it's fine" about something you have not checked.
+- Never blame her. State what happened, then the fix.
+- If you feel lost, stop changing things and ask Ben. A stopped mess is far easier to recover than an actively edited one.
+
+### Things worth knowing before she asks
+
+- **Her work is public the moment it is pushed.** The repo is public; a branch is visible on GitHub even before it is merged. Nothing private, nothing embarrassing, no real names or addresses.
+- **GitHub needs a login.** If `gh auth status` says she is not logged in, that is the first thing to fix, and it is a browser sign-in, not a password typed into the terminal.
+- **Commands can take a moment.** Pushing and deploys are not instant. Do not re-run something because it seemed slow.
+- **Nothing is broken by asking a question.** If she asks "is this ok?", answer it as a real question with a real answer, not a reassurance.
+
 ### When neither of you is sure — ask Ben
 
 - Check the repo first: `README.md`, this file, and the code. Most questions are already answered there.
